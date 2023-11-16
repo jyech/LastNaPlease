@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
 import com.app.assets.CartOrderPanel;
+import com.app.assets.ProductDetailsPanel;
 import javax.swing.Box;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
@@ -31,30 +32,20 @@ public class CartSection extends javax.swing.JPanel {
 
     public void displayCartItems(List<FoodItem> cartItems) {
     // Clear the existing items in the JScrollPane
-    OrderScrollPane.getViewport().removeAll();
-    System.out.println("Items in the Cart:");
 
     JPanel cartOrderPanelContainer = new JPanel();
     cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
 
     for (FoodItem item : cartItems) {
         if (item.getUserQuantity() >= 1) {
-            // Debugging print statements
-            System.out.println("Name: " + item.getName());
-            System.out.println("Quantity: " + item.getUserQuantity());
-            System.out.println("Price: " + item.getPrice());
-            System.out.println("Description: " + item.getDescription());
-            System.out.println("Order ID: " + item.getOrderId());
-            System.out.println("---------------------");
-
-            // Create a CartOrderPanel with information and add it to the container
-            CartOrderPanel cartOrderPanel = new CartOrderPanel(
+        // Create a CartOrderPanel with information and add it to the container
+            ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(
                     item.getName(),
-                    item.getDescription(),
                     item.getPrice(),
                     item.getUserQuantity()
             );
-
+            cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
+            cartOrderPanel.setOrderImage(item.getImageIcon());
             cartOrderPanelContainer.add(cartOrderPanel);
         }
     }
@@ -94,7 +85,7 @@ public class CartSection extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
         OrderScrollPane.setBackground(new java.awt.Color(241, 242, 237));
-        OrderScrollPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        OrderScrollPane.setBorder(null);
         OrderScrollPane.setHorizontalScrollBar(null);
         OrderScrollPane.setPreferredSize(new java.awt.Dimension(1100, 900));
 

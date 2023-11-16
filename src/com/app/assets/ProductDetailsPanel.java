@@ -4,18 +4,80 @@
  */
 package com.app.assets;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Kirin
  */
 public class ProductDetailsPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form ProductDetailsPanel
-     */
-    public ProductDetailsPanel() {
-        initComponents();
+    private String foodName;
+    private String foodDescription;
+    private double foodPrice;
+    private int foodQuantity;
+    private double foodTotal;
+    private int currentTotal;
+
+    public ProductDetailsPanel(String name, double price, int quantity) {
+    initComponents();
+    setOpaque(false);
+     
+    plusButton.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        plusButtonActionPerformed(evt);
     }
+    
+ });
+
+ MinusButton.addActionListener(new java.awt.event.ActionListener() {
+    public void actionPerformed(java.awt.event.ActionEvent evt) {
+        MinusButtonActionPerformed(evt);
+    }
+ });
+
+     this.foodName = name;
+     this.foodPrice = price;
+     this.foodQuantity = quantity;
+
+     // Set the values in your labels or components here
+     FoodName.setText(foodName);
+     FoodPrice.setText(String.valueOf(foodPrice));
+     Quantity.setText(String.valueOf(foodQuantity));
+
+     // Debugging print statements
+     System.out.println("Creating CartOrderPanel for: " + foodName);
+
+     // Update the total label after setting initial values
+     updateTotalLabel();
+    }
+   
+   public int getQuantity() {
+        return Integer.parseInt(Quantity.getText());
+    }
+   
+        public void setOrderImage(ImageIcon imageIcon) {
+         // Set the image for the PictureBox
+         Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+         FoodImage.setIcon(new ImageIcon(scaledImage));
+
+         // Update the total label when setting the image
+         updateTotalLabel();
+     }
+        
+    private void updateTotalLabel() {
+        double total = calculateTotal();
+        FoodTotal.setText(String.format("%.2f", total));
+        revalidate();
+        repaint();
+    }
+   
+        public double calculateTotal() {
+         return foodPrice * foodQuantity;
+     }
+        
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,40 +93,43 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         FoodImage = new javax.swing.JLabel();
         FoodPrice = new javax.swing.JLabel();
         FoodName = new javax.swing.JLabel();
-        RemoveButton = new com.app.assets.TextButton();
         Quantity = new javax.swing.JLabel();
-        MinusButton = new com.app.assets.TextButton();
-        PlusButton = new com.app.assets.TextButton();
-        jLabel4 = new javax.swing.JLabel();
+        FoodTotal = new javax.swing.JLabel();
+        MinusButton = new com.app.assets.ColoredButton();
+        plusButton = new com.app.assets.ColoredButton();
+        RemoveButton = new com.app.assets.TextButton();
 
-        setPreferredSize(new java.awt.Dimension(1000, 320));
+        setPreferredSize(new java.awt.Dimension(1100, 320));
 
         DetailsBG.setBackground(new java.awt.Color(241, 242, 237));
         DetailsBG.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        DetailsBG.setPreferredSize(new java.awt.Dimension(1240, 320));
+        DetailsBG.setPreferredSize(new java.awt.Dimension(1100, 320));
 
         ImageBG.setBackground(new java.awt.Color(232, 205, 90));
         ImageBG.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        ImageBG.setPreferredSize(new java.awt.Dimension(250, 250));
+        ImageBG.setPreferredSize(new java.awt.Dimension(200, 200));
 
         FoodImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FoodImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/foodimage.png"))); // NOI18N
+        FoodImage.setPreferredSize(new java.awt.Dimension(200, 200));
 
         javax.swing.GroupLayout ImageBGLayout = new javax.swing.GroupLayout(ImageBG);
         ImageBG.setLayout(ImageBGLayout);
         ImageBGLayout.setHorizontalGroup(
             ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImageBGLayout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28))
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ImageBGLayout.createSequentialGroup()
+                    .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
         ImageBGLayout.setVerticalGroup(
             ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImageBGLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(FoodImage)
-                .addGap(115, 115, 115))
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(ImageBGLayout.createSequentialGroup()
+                    .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         FoodPrice.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -73,112 +138,126 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         FoodName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         FoodName.setText("Food Name");
 
-        RemoveButton.setText("REMOVE");
-        RemoveButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        RemoveButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        RemoveButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEADING);
-
         Quantity.setBackground(new java.awt.Color(214, 211, 199));
         Quantity.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Quantity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Quantity.setText("1");
         Quantity.setOpaque(true);
 
+        FoodTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        FoodTotal.setText("0.00");
+
         MinusButton.setText("-");
-        MinusButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         MinusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 MinusButtonActionPerformed(evt);
             }
         });
 
-        PlusButton.setText("+");
-        PlusButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        PlusButton.addActionListener(new java.awt.event.ActionListener() {
+        plusButton.setText("+");
+        plusButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PlusButtonActionPerformed(evt);
+                plusButtonActionPerformed(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel4.setText("0.00");
+        RemoveButton.setText("REMOVE");
+        RemoveButton.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        RemoveButton.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DetailsBGLayout = new javax.swing.GroupLayout(DetailsBG);
         DetailsBG.setLayout(DetailsBGLayout);
         DetailsBGLayout.setHorizontalGroup(
             DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DetailsBGLayout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addComponent(ImageBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addComponent(RemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(614, Short.MAX_VALUE))
-                    .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
                         .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(FoodName, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
-                            .addComponent(FoodPrice, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FoodName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(FoodPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(PlusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addComponent(plusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(122, 122, 122)
+                        .addComponent(FoodTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(RemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(49, 49, 49))
         );
         DetailsBGLayout.setVerticalGroup(
             DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(DetailsBGLayout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(FoodName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(FoodPrice)
+                        .addGap(58, 58, 58)
+                        .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(plusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PlusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(18, 18, 18)
-                        .addComponent(RemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(ImageBG, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FoodTotal)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DetailsBGLayout.createSequentialGroup()
+                        .addComponent(FoodName)
+                        .addGap(4, 4, 4)
+                        .addComponent(FoodPrice)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(RemoveButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(65, 65, 65))
+                    .addComponent(ImageBG, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DetailsBG, javax.swing.GroupLayout.PREFERRED_SIZE, 1007, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(DetailsBG, javax.swing.GroupLayout.DEFAULT_SIZE, 1007, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DetailsBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(DetailsBG, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void MinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusButtonActionPerformed
-        int currentQuantity = Integer.parseInt(Quantity.getText());
+        int currentQuantity = getQuantity();
         if (currentQuantity > 1) {
             // Decrease quantity
-            Quantity.setText(String.valueOf(currentQuantity - 1));
+            foodQuantity = currentQuantity - 1;
+            Quantity.setText(String.valueOf(foodQuantity));
+            updateTotalLabel();
         }
     }//GEN-LAST:event_MinusButtonActionPerformed
 
-    private void PlusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusButtonActionPerformed
-        int currentQuantity = Integer.parseInt(Quantity.getText());
+    private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PlusButtonActionPerformed
+    int currentQuantity = Integer.parseInt(Quantity.getText());
         if (currentQuantity < 99) {
             // Increase quantity
-            Quantity.setText(String.valueOf(currentQuantity + 1));
+            foodQuantity = currentQuantity + 1;
+            Quantity.setText(String.valueOf(foodQuantity));
+            updateTotalLabel();
         }
     }//GEN-LAST:event_PlusButtonActionPerformed
+
+    private void PlusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
+        
+    }//GEN-LAST:event_plusButtonActionPerformed
+
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RemoveButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -186,11 +265,11 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel FoodImage;
     private javax.swing.JLabel FoodName;
     private javax.swing.JLabel FoodPrice;
+    private javax.swing.JLabel FoodTotal;
     private javax.swing.JPanel ImageBG;
-    private com.app.assets.TextButton MinusButton;
-    private com.app.assets.TextButton PlusButton;
+    private com.app.assets.ColoredButton MinusButton;
     private javax.swing.JLabel Quantity;
     private com.app.assets.TextButton RemoveButton;
-    private javax.swing.JLabel jLabel4;
+    private com.app.assets.ColoredButton plusButton;
     // End of variables declaration//GEN-END:variables
 }
