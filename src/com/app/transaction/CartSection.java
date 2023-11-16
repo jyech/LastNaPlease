@@ -9,6 +9,7 @@ import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
 import com.app.assets.CartOrderPanel;
+import javax.swing.Box;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -22,50 +23,58 @@ import javax.swing.BoxLayout;
  */
 public class CartSection extends javax.swing.JPanel {
 
+    
     public CartSection() {
-        initComponents();  // Ensure that this method is called to initialize the components
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));  // Initialize cartPanel
-        
+        initComponents();  // Ensure that this method is called to initialize the components // Initialize cartPanel
     }
 
 
     public void displayCartItems(List<FoodItem> cartItems) {
-        // Update the logic to display all items in cartItems
-        removeAll(); // Clear the existing items in CartSection
-        System.out.println("Items in the Cart:");
+    // Clear the existing items in the JScrollPane
+    OrderScrollPane.getViewport().removeAll();
+    System.out.println("Items in the Cart:");
 
-        for (FoodItem item : cartItems) {
-            if (item.getUserQuantity() >= 1) {
-                // Debugging print statements
-                System.out.println("Name: " + item.getName());
-                System.out.println("Quantity: " + item.getUserQuantity());
-                System.out.println("Price: " + item.getPrice());
-                System.out.println("Description: " + item.getDescription());
-                System.out.println("Order ID: " + item.getOrderId());
-                System.out.println("---------------------");
+    JPanel cartOrderPanelContainer = new JPanel();
+    cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
 
-                // Create a JLabel with information and add it directly to CartSection
-                String labelText = "<html>Name: " + item.getName() + "<br>Quantity: " + item.getUserQuantity() +
-                                   "<br>Price: " + item.getPrice() + "<br>Description: " + item.getDescription() +
-                                   "<br>Order ID: " + item.getOrderId() + "</html>";
+    for (FoodItem item : cartItems) {
+        if (item.getUserQuantity() >= 1) {
+            // Debugging print statements
+            System.out.println("Name: " + item.getName());
+            System.out.println("Quantity: " + item.getUserQuantity());
+            System.out.println("Price: " + item.getPrice());
+            System.out.println("Description: " + item.getDescription());
+            System.out.println("Order ID: " + item.getOrderId());
+            System.out.println("---------------------");
 
-                JLabel label = new JLabel(labelText);
-                add(label);
-            }
+            // Create a CartOrderPanel with information and add it to the container
+            CartOrderPanel cartOrderPanel = new CartOrderPanel(
+                    item.getName(),
+                    item.getDescription(),
+                    item.getPrice(),
+                    item.getUserQuantity()
+            );
+
+            cartOrderPanelContainer.add(cartOrderPanel);
         }
-
-        // Refresh CartSection on the EDT
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                revalidate();
-                repaint();
-            }
-        });
-
-        // Debugging print statement
-        System.out.println("Displaying CartItems completed.");
     }
+
+    // Add vertical glue to push CartOrderPanel instances to the top
+    cartOrderPanelContainer.add(Box.createVerticalGlue());
+
+    // Add the container to the existing JScrollPane
+    OrderScrollPane.setViewportView(cartOrderPanelContainer);
+    OrderScrollPane.setAlignmentX(LEFT_ALIGNMENT);  // Ensure the alignment is set to the left
+
+    revalidate();
+    repaint();
+
+    // Debugging print statement
+    System.out.println("Displaying CartItems completed.");
+}
+
+
+
 
 
 
@@ -79,11 +88,35 @@ public class CartSection extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 204, 204));
+        OrderScrollPane = new javax.swing.JScrollPane();
+
+        setBackground(new java.awt.Color(241, 242, 237));
         setPreferredSize(new java.awt.Dimension(1600, 900));
+
+        OrderScrollPane.setBackground(new java.awt.Color(241, 242, 237));
+        OrderScrollPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        OrderScrollPane.setHorizontalScrollBar(null);
+        OrderScrollPane.setPreferredSize(new java.awt.Dimension(1100, 900));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(OrderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 500, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(209, Short.MAX_VALUE)
+                .addComponent(OrderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane OrderScrollPane;
     // End of variables declaration//GEN-END:variables
 }

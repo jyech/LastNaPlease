@@ -46,16 +46,14 @@ public class CartOrderPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        CartOrderBG = new javax.swing.JPanel();
         NameLabel = new javax.swing.JLabel();
         DescriptionLabel = new javax.swing.JLabel();
         PriceLabel = new javax.swing.JLabel();
         QuantityLabel = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1600, 300));
-
-        CartOrderBG.setBackground(new java.awt.Color(204, 204, 255));
-        CartOrderBG.setPreferredSize(new java.awt.Dimension(1600, 300));
+        setBackground(new java.awt.Color(241, 242, 237));
+        setPreferredSize(new java.awt.Dimension(1100, 200));
+        setRequestFocusEnabled(false);
 
         NameLabel.setText("Food Name");
 
@@ -65,12 +63,12 @@ public class CartOrderPanel extends javax.swing.JPanel {
 
         QuantityLabel.setText("FoodQuantity");
 
-        javax.swing.GroupLayout CartOrderBGLayout = new javax.swing.GroupLayout(CartOrderBG);
-        CartOrderBG.setLayout(CartOrderBGLayout);
-        CartOrderBGLayout.setHorizontalGroup(
-            CartOrderBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CartOrderBGLayout.createSequentialGroup()
-                .addGap(80, 80, 80)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(123, 123, 123)
                 .addComponent(NameLabel)
                 .addGap(207, 207, 207)
                 .addComponent(DescriptionLabel)
@@ -78,39 +76,23 @@ public class CartOrderPanel extends javax.swing.JPanel {
                 .addComponent(PriceLabel)
                 .addGap(115, 115, 115)
                 .addComponent(QuantityLabel)
-                .addContainerGap(701, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
-        CartOrderBGLayout.setVerticalGroup(
-            CartOrderBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CartOrderBGLayout.createSequentialGroup()
-                .addGap(138, 138, 138)
-                .addGroup(CartOrderBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(93, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NameLabel)
                     .addComponent(DescriptionLabel)
                     .addComponent(PriceLabel)
                     .addComponent(QuantityLabel))
-                .addContainerGap(146, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(CartOrderBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(CartOrderBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel CartOrderBG;
     private javax.swing.JLabel DescriptionLabel;
     private javax.swing.JLabel NameLabel;
     private javax.swing.JLabel PriceLabel;

@@ -33,7 +33,7 @@ public class HomePage extends javax.swing.JFrame {
    
     public HomePage() {
         initComponents();
-        cartSection = new CartSection();
+        cartSection = CartMainPage;
         cartItems = new ArrayList<>();
         
         //BackButtons
@@ -117,7 +117,7 @@ public class HomePage extends javax.swing.JFrame {
         );
         CategoryPageLayout.setVerticalGroup(
             CategoryPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
         );
 
         getContentPane().add(CategoryPage, "card2");
