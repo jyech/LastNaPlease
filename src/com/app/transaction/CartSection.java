@@ -63,6 +63,7 @@ public class CartSection extends javax.swing.JPanel {
                         item.getPrice(),
                         item.getUserQuantity()
                 );
+                
                 cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
                 cartOrderPanel.setOrderImage(item.getImageIcon());
                 cartOrderPanelContainer.add(cartOrderPanel);

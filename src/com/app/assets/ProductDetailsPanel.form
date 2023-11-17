@@ -50,28 +50,15 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                   <Component id="ImageBG" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="FoodPrice" min="-2" pref="235" max="-2" attributes="0"/>
-                              <Component id="FoodName" min="-2" pref="235" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="MinusButton" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="Quantity" min="-2" pref="37" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="plusButton" min="-2" pref="35" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="FoodTotal" min="-2" pref="155" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="RemoveButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="690" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="FoodPrice" min="-2" pref="235" max="-2" attributes="0"/>
+                      <Component id="FoodName" min="-2" pref="235" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="61" max="-2" attributes="0"/>
+                  <Component id="Quantity" min="-2" pref="37" max="-2" attributes="0"/>
+                  <EmptySpace pref="262" max="32767" attributes="0"/>
+                  <Component id="FoodTotal" min="-2" pref="155" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -82,11 +69,9 @@
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="plusButton" alignment="1" min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="Quantity" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="MinusButton" min="-2" pref="36" max="-2" attributes="0"/>
                               <Component id="FoodTotal" alignment="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -95,12 +80,10 @@
                           <Component id="FoodName" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="FoodPrice" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="RemoveButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="ImageBG" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <EmptySpace pref="34" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -195,32 +178,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="0.00"/>
           </Properties>
-        </Component>
-        <Component class="com.app.assets.ColoredButton" name="MinusButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="-"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MinusButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.app.assets.ColoredButton" name="plusButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="+"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="plusButtonActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="com.app.assets.TextButton" name="RemoveButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="REMOVE"/>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="horizontalTextPosition" type="int" value="2"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="RemoveButtonActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>
