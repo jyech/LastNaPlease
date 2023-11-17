@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JPanel;
 import com.app.assets.CartOrderPanel;
 import com.app.assets.ProductDetailsPanel;
+import java.awt.Component;
 import java.util.HashSet;
 import java.util.Set;
 import javax.swing.Box;
@@ -25,7 +26,8 @@ import javax.swing.BoxLayout;
  * @author Kirin
  */
 public class CartSection extends javax.swing.JPanel {
-
+    
+    
     
     public CartSection() {
         initComponents();  // Ensure that this method is called to initialize the components // Initialize cartPanel
@@ -40,27 +42,35 @@ public class CartSection extends javax.swing.JPanel {
 
     for (FoodItem item : cartItems) {
         if (item.getUserQuantity() >= 1) {
-            // Create a CartOrderPanel with information and add it to the container
-            ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(
-                    item.getName(),
-                    item.getPrice(),
-                    item.getUserQuantity()
-            );
-            cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
-            cartOrderPanel.setOrderImage(item.getImageIcon());
-            cartOrderPanelContainer.add(cartOrderPanel);
+            // Check if the item is already displayed in the cart
+            ProductDetailsPanel existingPanel = findExistingPanel(cartOrderPanelContainer, item.getName());
+
+            if (existingPanel != null) {
+                // Item already exists, update its quantity
+                existingPanel.updateQuantity(existingPanel.getQuantity() + item.getUserQuantity());
+            } else {
+                // Create a new CartOrderPanel and add it to the container
+                ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(
+                        item.getName(),
+                        item.getPrice(),
+                        item.getUserQuantity()
+                );
+                cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
+                cartOrderPanel.setOrderImage(item.getImageIcon());
+                cartOrderPanelContainer.add(cartOrderPanel);
+            }
         }
     }
 
     // Add vertical glue to push CartOrderPanel instances to the top
     cartOrderPanelContainer.add(Box.createVerticalGlue());
 
+    // Set the TotalQuantityLabel to display the number of unique items
+    TotalQuantityLabel.setText(uniqueItemsCount + " Items");
+
     // Add the container to the existing JScrollPane
     OrderScrollPane.setViewportView(cartOrderPanelContainer);
     OrderScrollPane.setAlignmentX(LEFT_ALIGNMENT);  // Ensure the alignment is set to the left
-
-    // Display the total number of unique items
-    TotalQuantityLabel.setText(uniqueItemsCount + " Items");
 
     revalidate();
     repaint();
@@ -70,19 +80,46 @@ public class CartSection extends javax.swing.JPanel {
 }
 
 
+private ProductDetailsPanel findExistingPanel(JPanel container, String itemName) {
+    Component[] components = container.getComponents();
 
-    private int calculateUniqueItemsCount(List<FoodItem> cartItems) {
-        // Use a set to store unique food item names
-        Set<String> uniqueItemNames = new HashSet<>();
+    for (Component component : components) {
+        if (component instanceof ProductDetailsPanel) {
+            ProductDetailsPanel existingPanel = (ProductDetailsPanel) component;
+            if (existingPanel.getName().equals(itemName)) {
+                return existingPanel;
+            }
+        }
+    }
+
+    return null;
+}
+
+
+private int calculateUniqueItemsCount(List<FoodItem> cartItems) {
+    // Use a set to store unique food item names
+    Set<String> uniqueItemNames = new HashSet<>();
+
+    for (FoodItem item : cartItems) {
+        if (item.getUserQuantity() >= 1) {
+            uniqueItemNames.add(item.getName());
+        }
+    }
+
+    // Return the count of unique food items
+    return uniqueItemNames.size();
+}
+
+    private int calculateTotalQuantity(List<FoodItem> cartItems) {
+        int totalQuantity = 0;
 
         for (FoodItem item : cartItems) {
             if (item.getUserQuantity() >= 1) {
-                uniqueItemNames.add(item.getName());
+                totalQuantity += item.getUserQuantity();
             }
         }
 
-        // Return the count of unique food items
-        return uniqueItemNames.size();
+        return totalQuantity;
     }
 
 

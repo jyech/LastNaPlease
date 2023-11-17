@@ -20,52 +20,58 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     private double foodTotal;
     private int currentTotal;
 
+    // Add a constructor to set the name
     public ProductDetailsPanel(String name, double price, int quantity) {
-    initComponents();
-    setOpaque(false);
-     
-    plusButton.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        plusButtonActionPerformed(evt);
+        // Call the existing constructor
+        initComponents();
+        setOpaque(false);
+
+        plusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                plusButtonActionPerformed(evt);
+            }
+        });
+
+        MinusButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MinusButtonActionPerformed(evt);
+            }
+        });
+
+        // Set the name of the panel
+        setName(name);
+
+        this.foodName = name;
+        this.foodPrice = price;
+        this.foodQuantity = quantity;
+
+        // Set the values in your labels or components here
+        FoodName.setText(foodName);
+        FoodPrice.setText(String.valueOf(foodPrice));
+        Quantity.setText(String.valueOf(foodQuantity));
+
+        // Debugging print statements
+        System.out.println("Creating CartOrderPanel for: " + foodName);
+
+        // Update the total label after setting initial values
+        updateTotalLabel();
     }
-    
- });
 
- MinusButton.addActionListener(new java.awt.event.ActionListener() {
-    public void actionPerformed(java.awt.event.ActionEvent evt) {
-        MinusButtonActionPerformed(evt);
-    }
- });
+    // Existing code...
 
-     this.foodName = name;
-     this.foodPrice = price;
-     this.foodQuantity = quantity;
+    public void setOrderImage(ImageIcon imageIcon) {
+        // Set the image for the PictureBox
+        Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        FoodImage.setIcon(new ImageIcon(scaledImage));
 
-     // Set the values in your labels or components here
-     FoodName.setText(foodName);
-     FoodPrice.setText(String.valueOf(foodPrice));
-     Quantity.setText(String.valueOf(foodQuantity));
-
-     // Debugging print statements
-     System.out.println("Creating CartOrderPanel for: " + foodName);
-
-     // Update the total label after setting initial values
-     updateTotalLabel();
+        // Update the total label when setting the image
+        updateTotalLabel();
     }
    
    public int getQuantity() {
         return Integer.parseInt(Quantity.getText());
     }
    
-        public void setOrderImage(ImageIcon imageIcon) {
-         // Set the image for the PictureBox
-         Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
-         FoodImage.setIcon(new ImageIcon(scaledImage));
-
-         // Update the total label when setting the image
-         updateTotalLabel();
-     }
-        
     private void updateTotalLabel() {
         double total = calculateTotal();
         FoodTotal.setText(String.format("%.2f", total));
@@ -77,7 +83,16 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
          return foodPrice * foodQuantity;
      }
         
-        
+    public void updateQuantity(int newQuantity) {
+        // Update the quantity and total labels when the quantity changes
+        this.foodQuantity = newQuantity;
+        Quantity.setText(String.valueOf(foodQuantity));
+        updateTotalLabel();
+    }
+    
+    public String getFoodName() {
+        return foodName;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
