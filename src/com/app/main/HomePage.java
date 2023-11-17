@@ -48,12 +48,13 @@ public class HomePage extends javax.swing.JFrame {
         }
      };
         
-        ProduceGoToCartButton.addActionListener(new ActionListener() {
+        ActionListener cartSwitchListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            switchToCartSection();
+            JButton sourceButton = (JButton) e.getSource();
+            ((HomePage) SwingUtilities.getWindowAncestor(sourceButton)).switchToCartSection();
         }
-    });
+     };
         
         CheckOutButton.addActionListener(new ActionListener() {
             @Override
@@ -81,6 +82,11 @@ public class HomePage extends javax.swing.JFrame {
      SnackBackButton.addActionListener(backButtonListener);   
      MeatBackButton.addActionListener(backButtonListener);
      SeafoodBackButton.addActionListener(backButtonListener);
+     ProduceGoToCartButton.addActionListener(cartSwitchListener);
+     BeverageGoToCartButton.addActionListener(cartSwitchListener);
+     SnackGoToCartButton.addActionListener(cartSwitchListener);
+     MeatGoToCartButton.addActionListener(cartSwitchListener);
+     SeafoodGoToCartButton.addActionListener(cartSwitchListener);
     }
     
     
@@ -196,15 +202,22 @@ public class HomePage extends javax.swing.JFrame {
         ProduceBackButton = new com.app.assets.ColoredButton();
         ProduceSection = new com.app.sections.ProduceSection();
         BeveragePage = new javax.swing.JPanel();
+        BeverageGoToCartButton = new com.app.assets.ColoredButton();
         BeverageBackButton = new com.app.assets.ColoredButton();
         BeverageSection = new com.app.sections.BeverageSection();
         SnackPage = new javax.swing.JPanel();
+        SnackGoToCartButton = new com.app.assets.ColoredButton();
         SnackBackButton = new com.app.assets.ColoredButton();
         SnackSection = new com.app.sections.SnackSection();
         MeatPage = new javax.swing.JPanel();
+        MeatGoToCartButton = new com.app.assets.ColoredButton();
         MeatBackButton = new com.app.assets.ColoredButton();
-        MeatSection = new com.app.sections.MeatSection();
+        ProduceSectionBG = new javax.swing.JPanel();
+        FreshProduceLabel = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        meatSection2 = new com.app.sections.MeatSection();
         SeafoodPage = new javax.swing.JPanel();
+        SeafoodGoToCartButton = new com.app.assets.ColoredButton();
         SeafoodBackButton = new com.app.assets.ColoredButton();
         SeafoodSection = new com.app.sections.SeafoodSection();
         CartPage = new javax.swing.JPanel();
@@ -254,6 +267,11 @@ public class HomePage extends javax.swing.JFrame {
 
         BeveragePage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        BeverageGoToCartButton.setText("C");
+        BeverageGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BeverageGoToCartButton.setRadius(100);
+        BeveragePage.add(BeverageGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
+
         BeverageBackButton.setText("<-");
         BeverageBackButton.setRadius(100);
         BeveragePage.add(BeverageBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
@@ -264,6 +282,11 @@ public class HomePage extends javax.swing.JFrame {
         SnackPage.setPreferredSize(new java.awt.Dimension(1280, 720));
         SnackPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        SnackGoToCartButton.setText("C");
+        SnackGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SnackGoToCartButton.setRadius(100);
+        SnackPage.add(SnackGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
+
         SnackBackButton.setText("<-");
         SnackBackButton.setRadius(100);
         SnackPage.add(SnackBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
@@ -273,14 +296,52 @@ public class HomePage extends javax.swing.JFrame {
 
         MeatPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        MeatGoToCartButton.setText("C");
+        MeatGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MeatGoToCartButton.setRadius(100);
+        MeatPage.add(MeatGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
+
         MeatBackButton.setText("<-");
         MeatBackButton.setRadius(100);
         MeatPage.add(MeatBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
-        MeatPage.add(MeatSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        ProduceSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+
+        FreshProduceLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        FreshProduceLabel.setText("Meat");
+
+        jScrollPane1.setHorizontalScrollBar(null);
+        jScrollPane1.setViewportView(meatSection2);
+
+        javax.swing.GroupLayout ProduceSectionBGLayout = new javax.swing.GroupLayout(ProduceSectionBG);
+        ProduceSectionBG.setLayout(ProduceSectionBGLayout);
+        ProduceSectionBGLayout.setHorizontalGroup(
+            ProduceSectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProduceSectionBGLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(FreshProduceLabel)
+                .addContainerGap(1424, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
+        );
+        ProduceSectionBGLayout.setVerticalGroup(
+            ProduceSectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ProduceSectionBGLayout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(FreshProduceLabel)
+                .addGap(0, 0, 0)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 784, Short.MAX_VALUE))
+        );
+
+        MeatPage.add(ProduceSectionBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1600, 900));
 
         getContentPane().add(MeatPage, "card6");
 
         SeafoodPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SeafoodGoToCartButton.setText("C");
+        SeafoodGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SeafoodGoToCartButton.setRadius(100);
+        SeafoodPage.add(SeafoodGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
 
         SeafoodBackButton.setText("<-");
         SeafoodBackButton.setRadius(100);
@@ -381,6 +442,7 @@ public class HomePage extends javax.swing.JFrame {
     private com.app.assets.ColoredButton BackToCartButton;
     private com.app.assets.ColoredButton BackToShopButton;
     private com.app.assets.ColoredButton BeverageBackButton;
+    private com.app.assets.ColoredButton BeverageGoToCartButton;
     private javax.swing.JPanel BeveragePage;
     private com.app.sections.BeverageSection BeverageSection;
     private com.app.transaction.CartSection CartMainPage;
@@ -390,18 +452,24 @@ public class HomePage extends javax.swing.JFrame {
     private com.app.assets.ColoredButton CheckOutButton;
     private com.app.transaction.CheckoutSection CheckOutSection;
     private javax.swing.JPanel CheckoutPage;
+    private javax.swing.JLabel FreshProduceLabel;
     private com.app.assets.ColoredButton MeatBackButton;
+    private com.app.assets.ColoredButton MeatGoToCartButton;
     private javax.swing.JPanel MeatPage;
-    private com.app.sections.MeatSection MeatSection;
     private com.app.assets.ColoredButton ProduceBackButton;
     private com.app.assets.ColoredButton ProduceGoToCartButton;
     private javax.swing.JPanel ProducePage;
     private com.app.sections.ProduceSection ProduceSection;
+    private javax.swing.JPanel ProduceSectionBG;
     private com.app.assets.ColoredButton SeafoodBackButton;
+    private com.app.assets.ColoredButton SeafoodGoToCartButton;
     private javax.swing.JPanel SeafoodPage;
     private com.app.sections.SeafoodSection SeafoodSection;
     private com.app.assets.ColoredButton SnackBackButton;
+    private com.app.assets.ColoredButton SnackGoToCartButton;
     private javax.swing.JPanel SnackPage;
     private com.app.sections.SnackSection SnackSection;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.app.sections.MeatSection meatSection2;
     // End of variables declaration//GEN-END:variables
 }
