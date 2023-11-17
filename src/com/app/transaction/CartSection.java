@@ -32,7 +32,7 @@ public class CartSection extends javax.swing.JPanel {
 
     public void displayCartItems(List<FoodItem> cartItems) {
     // Clear the existing items in the JScrollPane
-
+    int totalQuantity = calculateTotalQuantity(cartItems);
     JPanel cartOrderPanelContainer = new JPanel();
     cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
 
@@ -47,9 +47,9 @@ public class CartSection extends javax.swing.JPanel {
             cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
             cartOrderPanel.setOrderImage(item.getImageIcon());
             cartOrderPanelContainer.add(cartOrderPanel);
+            TotalQuantityLabel.setText(totalQuantity + " Items");
         }
     }
-
     // Add vertical glue to push CartOrderPanel instances to the top
     cartOrderPanelContainer.add(Box.createVerticalGlue());
 
@@ -66,7 +66,17 @@ public class CartSection extends javax.swing.JPanel {
 
 
 
+    private int calculateTotalQuantity(List<FoodItem> cartItems) {
+        int totalQuantity = 0;
 
+        for (FoodItem item : cartItems) {
+            if (item.getUserQuantity() >= 1) {
+                totalQuantity += item.getUserQuantity();
+            }
+        }
+
+        return totalQuantity;
+    }
 
 
 
@@ -80,6 +90,12 @@ public class CartSection extends javax.swing.JPanel {
     private void initComponents() {
 
         OrderScrollPane = new javax.swing.JScrollPane();
+        ShoppingCartLabel = new javax.swing.JLabel();
+        QuantityLabel = new javax.swing.JLabel();
+        ProductDetailsLabel = new javax.swing.JLabel();
+        PriceTotalLabel = new javax.swing.JLabel();
+        OrderSummaryPanel = new javax.swing.JPanel();
+        TotalQuantityLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(241, 242, 237));
         setPreferredSize(new java.awt.Dimension(1600, 900));
@@ -89,25 +105,85 @@ public class CartSection extends javax.swing.JPanel {
         OrderScrollPane.setHorizontalScrollBar(null);
         OrderScrollPane.setPreferredSize(new java.awt.Dimension(1100, 900));
 
+        ShoppingCartLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ShoppingCartLabel.setText("Shopping Cart");
+
+        QuantityLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        QuantityLabel.setText("Quantity");
+
+        ProductDetailsLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ProductDetailsLabel.setText("Product Details");
+
+        PriceTotalLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        PriceTotalLabel.setText("Price Total");
+
+        OrderSummaryPanel.setBackground(new java.awt.Color(191, 191, 191));
+        OrderSummaryPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        javax.swing.GroupLayout OrderSummaryPanelLayout = new javax.swing.GroupLayout(OrderSummaryPanel);
+        OrderSummaryPanel.setLayout(OrderSummaryPanelLayout);
+        OrderSummaryPanelLayout.setHorizontalGroup(
+            OrderSummaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 494, Short.MAX_VALUE)
+        );
+        OrderSummaryPanelLayout.setVerticalGroup(
+            OrderSummaryPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 894, Short.MAX_VALUE)
+        );
+
+        TotalQuantityLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        TotalQuantityLabel.setText("0 Items");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(OrderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 500, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(OrderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(ProductDetailsLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(QuantityLabel)
+                        .addGap(247, 247, 247)
+                        .addComponent(PriceTotalLabel)
+                        .addGap(119, 119, 119))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(89, 89, 89)
+                        .addComponent(ShoppingCartLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TotalQuantityLabel)
+                        .addGap(33, 33, 33)))
+                .addComponent(OrderSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(209, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ShoppingCartLabel)
+                    .addComponent(TotalQuantityLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(QuantityLabel)
+                    .addComponent(PriceTotalLabel)
+                    .addComponent(ProductDetailsLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(OrderScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 686, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(OrderSummaryPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane OrderScrollPane;
+    private javax.swing.JPanel OrderSummaryPanel;
+    private javax.swing.JLabel PriceTotalLabel;
+    private javax.swing.JLabel ProductDetailsLabel;
+    private javax.swing.JLabel QuantityLabel;
+    private javax.swing.JLabel ShoppingCartLabel;
+    private javax.swing.JLabel TotalQuantityLabel;
     // End of variables declaration//GEN-END:variables
 }

@@ -30,14 +30,16 @@ public class HomePage extends javax.swing.JFrame {
     
     private List<FoodItem> cartItems; 
     private CartSection cartSection;
+    private String currentPage; 
+    private String previousPage;
    
     public HomePage() {
         initComponents();
         cartSection = CartMainPage;
         cartItems = new ArrayList<>();
+        currentPage = "card2";
         
         //BackButtons
-        
         ActionListener backButtonListener = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -46,14 +48,34 @@ public class HomePage extends javax.swing.JFrame {
         }
      };
         
-        GoToCartButton.addActionListener(new ActionListener() {
+        ProduceGoToCartButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
             switchToCartSection();
         }
     });
         
-
+        CheckOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchToCheckoutSection();
+            }
+        });
+        
+        BackToShopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchToPreviousSection();
+            }
+        });
+        
+        BackToCartButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchToPreviousSection();
+            }
+        });
+        
      ProduceBackButton.addActionListener(backButtonListener);
      BeverageBackButton.addActionListener(backButtonListener);
      SnackBackButton.addActionListener(backButtonListener);   
@@ -62,13 +84,101 @@ public class HomePage extends javax.swing.JFrame {
     }
     
     
+    public void switchToProduceSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card3");
+        currentPage = "card3";
+    }
+
+    public void switchToBeverageSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card4");
+        currentPage = "card4";
+    }
+
+    public void switchToSnackSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card5");
+        currentPage = "card5";
+    }
+
+    public void switchToMeatSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card6");
+        currentPage = "card6";
+    }
+
+    public void switchToSeafoodSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card7");
+        currentPage = "card7";
+    }
+
+    public void switchToCategorySection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card2");
+        currentPage = "card2";
+    }
+
+    public void switchToCartSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card8");
+        cartSection.displayCartItems(cartItems);
+        currentPage = "card8";
+    }
+
+    public void switchToCheckoutSection() {
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card9");
+        currentPage = "card9";
+    }
+
+    private void switchToPreviousSection() {
+        System.out.println("Current Page: " + currentPage);
+        // Determine the current page and switch back accordingly
+        switch (previousPage) {
+            case "card3":
+                switchToProduceSection();
+                break;
+            case "card4":
+                switchToBeverageSection();
+                break;
+            case "card5":
+                switchToSnackSection();
+                break;
+            case "card6":
+                switchToMeatSection();
+                break;
+            case "card7":
+                switchToSeafoodSection();
+                break;
+            case "card8":
+                switchToCartSection();
+                break;
+            case "card9":
+                switchToCheckoutSection();
+                break;
+            default:
+                // Default to the category section if the current page is unknown
+                switchToCategorySection();
+                break;
+        }
+    }
+
+
+
     
     public void addItemToCart(FoodItem foodItem) {
         cartItems.add(foodItem);
     }
-    
-
-
+  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,7 +192,7 @@ public class HomePage extends javax.swing.JFrame {
         CategoryPage = new javax.swing.JPanel();
         CategorySection = new com.app.sections.CategorySection();
         ProducePage = new javax.swing.JPanel();
-        GoToCartButton = new com.app.assets.ColoredButton();
+        ProduceGoToCartButton = new com.app.assets.ColoredButton();
         ProduceBackButton = new com.app.assets.ColoredButton();
         ProduceSection = new com.app.sections.ProduceSection();
         BeveragePage = new javax.swing.JPanel();
@@ -98,7 +208,12 @@ public class HomePage extends javax.swing.JFrame {
         SeafoodBackButton = new com.app.assets.ColoredButton();
         SeafoodSection = new com.app.sections.SeafoodSection();
         CartPage = new javax.swing.JPanel();
+        CheckOutButton = new com.app.assets.ColoredButton();
+        BackToShopButton = new com.app.assets.ColoredButton();
         CartMainPage = new com.app.transaction.CartSection();
+        CheckoutPage = new javax.swing.JPanel();
+        BackToCartButton = new com.app.assets.ColoredButton();
+        CheckOutSection = new com.app.transaction.CheckoutSection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -117,17 +232,17 @@ public class HomePage extends javax.swing.JFrame {
         );
         CategoryPageLayout.setVerticalGroup(
             CategoryPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, 912, Short.MAX_VALUE)
+            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         getContentPane().add(CategoryPage, "card2");
 
         ProducePage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        GoToCartButton.setText("C");
-        GoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        GoToCartButton.setRadius(100);
-        ProducePage.add(GoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
+        ProduceGoToCartButton.setText("C");
+        ProduceGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        ProduceGoToCartButton.setRadius(100);
+        ProducePage.add(ProduceGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
 
         ProduceBackButton.setText("<-");
         ProduceBackButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -174,24 +289,28 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(SeafoodPage, "card7");
 
-        javax.swing.GroupLayout CartPageLayout = new javax.swing.GroupLayout(CartPage);
-        CartPage.setLayout(CartPageLayout);
-        CartPageLayout.setHorizontalGroup(
-            CartPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CartPageLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CartMainPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        CartPageLayout.setVerticalGroup(
-            CartPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CartPageLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(CartMainPage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        CartPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CheckOutButton.setText("CHECKOUT");
+        CartPage.add(CheckOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 800, 420, 60));
+
+        BackToShopButton.setText("<-");
+        BackToShopButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BackToShopButton.setRadius(100);
+        CartPage.add(BackToShopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, 50));
+        CartPage.add(CartMainPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CartPage, "card8");
+
+        CheckoutPage.setPreferredSize(new java.awt.Dimension(1280, 720));
+        CheckoutPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BackToCartButton.setText("<-");
+        BackToCartButton.setRadius(100);
+        CheckoutPage.add(BackToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
+        CheckoutPage.add(CheckOutSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        getContentPane().add(CheckoutPage, "card9");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -231,35 +350,6 @@ public class HomePage extends javax.swing.JFrame {
         });
     }
     
-    public void switchToProduceSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card3");
-    }
-    
-    public void switchToBeverageSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card4");
-    }
-    
-    public void switchToSnackSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card5");
-    }
-    
-    public void switchToMeatSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card6");
-    }
-    
-    public void switchToSeafoodSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card7");
-    }
-    
-    public void switchToCategorySection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card2");
-    }
     
     private class AddToCartListener implements ActionListener {
     private FoodItem foodItem;
@@ -279,22 +369,17 @@ public class HomePage extends javax.swing.JFrame {
         foodItem.setUserQuantity(quantity);
 
         // Add the FoodItem to the cart
-        HomePage.this.addItemToCart(foodItem);  // Use HomePage.this to refer to the outer class method
+        HomePage.this.addItemToCart(foodItem);  
 
         // Print a message to confirm that the item has been added
         System.out.println("Item added to cart: " + foodItem.getName());
     }
 }
-    
-    public void switchToCartSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card8");  // Assuming "card8" is the identifier for the CartPage
-        cartSection.displayCartItems(cartItems);
-
-    }
-
+  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.app.assets.ColoredButton BackToCartButton;
+    private com.app.assets.ColoredButton BackToShopButton;
     private com.app.assets.ColoredButton BeverageBackButton;
     private javax.swing.JPanel BeveragePage;
     private com.app.sections.BeverageSection BeverageSection;
@@ -302,11 +387,14 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel CartPage;
     private javax.swing.JPanel CategoryPage;
     private com.app.sections.CategorySection CategorySection;
-    private com.app.assets.ColoredButton GoToCartButton;
+    private com.app.assets.ColoredButton CheckOutButton;
+    private com.app.transaction.CheckoutSection CheckOutSection;
+    private javax.swing.JPanel CheckoutPage;
     private com.app.assets.ColoredButton MeatBackButton;
     private javax.swing.JPanel MeatPage;
     private com.app.sections.MeatSection MeatSection;
     private com.app.assets.ColoredButton ProduceBackButton;
+    private com.app.assets.ColoredButton ProduceGoToCartButton;
     private javax.swing.JPanel ProducePage;
     private com.app.sections.ProduceSection ProduceSection;
     private com.app.assets.ColoredButton SeafoodBackButton;

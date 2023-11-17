@@ -26,19 +26,292 @@ public class CheckoutSection extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        CheckoutLabel = new javax.swing.JLabel();
+        ContactInfoLabel = new javax.swing.JLabel();
+        FirstNameTextfield = new javax.swing.JTextField();
+        LastNameTextfield = new javax.swing.JTextField();
+        MobileNumberTextfield = new javax.swing.JTextField();
+        AddressTextfield = new javax.swing.JTextField();
+        DeliveryMethodLabel = new javax.swing.JLabel();
+        FirstNameLabel = new javax.swing.JLabel();
+        LastNameLabel = new javax.swing.JLabel();
+        MobileNumberLabel = new javax.swing.JLabel();
+        AddressLabel = new javax.swing.JLabel();
+        SameDayButton = new com.app.assets.ColoredButton();
+        RegularButton = new com.app.assets.ColoredButton();
+        PickUpButton = new com.app.assets.ColoredButton();
+        PaymentMethodLabel = new javax.swing.JLabel();
+        GCashButton = new com.app.assets.ColoredButton();
+        CashButton = new com.app.assets.ColoredButton();
+        ListOfItemsPanel = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        TotalLabel = new javax.swing.JLabel();
+        PaymentLabel = new javax.swing.JLabel();
+        ChangeLabel = new javax.swing.JLabel();
+        TotalNumberLabel = new javax.swing.JLabel();
+        ChangeNumberLabel = new javax.swing.JLabel();
+        PaymentTextfield = new javax.swing.JTextField();
+        ListOfItemsLabel = new javax.swing.JLabel();
+        PayButton = new com.app.assets.ColoredButton();
+
+        setBackground(new java.awt.Color(241, 242, 237));
+        setPreferredSize(new java.awt.Dimension(1600, 900));
+
+        CheckoutLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        CheckoutLabel.setText("Checkout");
+
+        ContactInfoLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ContactInfoLabel.setText("1. Contact Information");
+
+        FirstNameTextfield.setBackground(new java.awt.Color(214, 211, 199));
+        FirstNameTextfield.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FirstNameTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        FirstNameTextfield.setSelectionColor(new java.awt.Color(160, 157, 149));
+
+        LastNameTextfield.setBackground(new java.awt.Color(214, 211, 199));
+        LastNameTextfield.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LastNameTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        LastNameTextfield.setSelectionColor(new java.awt.Color(160, 157, 149));
+
+        MobileNumberTextfield.setBackground(new java.awt.Color(214, 211, 199));
+        MobileNumberTextfield.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MobileNumberTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        MobileNumberTextfield.setSelectionColor(new java.awt.Color(160, 157, 149));
+
+        AddressTextfield.setBackground(new java.awt.Color(214, 211, 199));
+        AddressTextfield.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        AddressTextfield.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        AddressTextfield.setSelectionColor(new java.awt.Color(160, 157, 149));
+
+        DeliveryMethodLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        DeliveryMethodLabel.setText("2. Delivery Method");
+
+        FirstNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        FirstNameLabel.setText("First Name");
+
+        LastNameLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        LastNameLabel.setText("Last Name");
+
+        MobileNumberLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        MobileNumberLabel.setText("Mobile Number");
+
+        AddressLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        AddressLabel.setText("Address");
+
+        SameDayButton.setText("SAME DAY");
+
+        RegularButton.setText("REGULAR");
+
+        PickUpButton.setText("PICK - UP");
+
+        PaymentMethodLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PaymentMethodLabel.setText("3. Payment Method");
+
+        GCashButton.setText("GCASH");
+
+        CashButton.setText("CASH");
+
+        ListOfItemsPanel.setBackground(new java.awt.Color(241, 242, 237));
+        ListOfItemsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 367, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 350, Short.MAX_VALUE)
+        );
+
+        TotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TotalLabel.setText("Total");
+
+        PaymentLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PaymentLabel.setText("Payment");
+
+        ChangeLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ChangeLabel.setText("Change");
+
+        TotalNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        TotalNumberLabel.setText("P 100.00");
+
+        ChangeNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        ChangeNumberLabel.setText("P 100.00");
+
+        PaymentTextfield.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        PaymentTextfield.setText("0.00");
+        PaymentTextfield.setPreferredSize(new java.awt.Dimension(99, 32));
+
+        ListOfItemsLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        ListOfItemsLabel.setText("List of Items");
+
+        javax.swing.GroupLayout ListOfItemsPanelLayout = new javax.swing.GroupLayout(ListOfItemsPanel);
+        ListOfItemsPanel.setLayout(ListOfItemsPanelLayout);
+        ListOfItemsPanelLayout.setHorizontalGroup(
+            ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ListOfItemsLabel)
+                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                            .addComponent(ChangeLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ChangeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListOfItemsPanelLayout.createSequentialGroup()
+                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(TotalLabel)
+                                .addComponent(PaymentLabel))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(TotalNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+        ListOfItemsPanelLayout.setVerticalGroup(
+            ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(ListOfItemsLabel)
+                .addGap(26, 26, 26)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TotalLabel)
+                    .addComponent(TotalNumberLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PaymentLabel)
+                    .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChangeLabel)
+                    .addComponent(ChangeNumberLabel))
+                .addContainerGap(98, Short.MAX_VALUE))
+        );
+
+        PayButton.setText("PAY");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(SameDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(RegularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(PickUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(DeliveryMethodLabel)
+                    .addComponent(ContactInfoLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FirstNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(FirstNameLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LastNameLabel)
+                            .addComponent(LastNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(MobileNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(MobileNumberLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddressLabel)
+                            .addComponent(AddressTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(CheckoutLabel)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(GCashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(CashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(PaymentMethodLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ListOfItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PayButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(116, 116, 116))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(CheckoutLabel)
+                        .addGap(66, 66, 66)
+                        .addComponent(ContactInfoLabel)
+                        .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameLabel)
+                            .addComponent(LastNameLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(FirstNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(LastNameTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MobileNumberLabel)
+                            .addComponent(AddressLabel))
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(MobileNumberTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(AddressTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57)
+                        .addComponent(DeliveryMethodLabel)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SameDayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(RegularButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PickUpButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(71, 71, 71)
+                        .addComponent(PaymentMethodLabel)
+                        .addGap(35, 35, 35)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(GCashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(ListOfItemsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(PayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AddressLabel;
+    private javax.swing.JTextField AddressTextfield;
+    private com.app.assets.ColoredButton CashButton;
+    private javax.swing.JLabel ChangeLabel;
+    private javax.swing.JLabel ChangeNumberLabel;
+    private javax.swing.JLabel CheckoutLabel;
+    private javax.swing.JLabel ContactInfoLabel;
+    private javax.swing.JLabel DeliveryMethodLabel;
+    private javax.swing.JLabel FirstNameLabel;
+    private javax.swing.JTextField FirstNameTextfield;
+    private com.app.assets.ColoredButton GCashButton;
+    private javax.swing.JLabel LastNameLabel;
+    private javax.swing.JTextField LastNameTextfield;
+    private javax.swing.JLabel ListOfItemsLabel;
+    private javax.swing.JPanel ListOfItemsPanel;
+    private javax.swing.JLabel MobileNumberLabel;
+    private javax.swing.JTextField MobileNumberTextfield;
+    private com.app.assets.ColoredButton PayButton;
+    private javax.swing.JLabel PaymentLabel;
+    private javax.swing.JLabel PaymentMethodLabel;
+    private javax.swing.JTextField PaymentTextfield;
+    private com.app.assets.ColoredButton PickUpButton;
+    private com.app.assets.ColoredButton RegularButton;
+    private com.app.assets.ColoredButton SameDayButton;
+    private javax.swing.JLabel TotalLabel;
+    private javax.swing.JLabel TotalNumberLabel;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
