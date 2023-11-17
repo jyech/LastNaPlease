@@ -56,12 +56,6 @@ public class HomePage extends javax.swing.JFrame {
         }
      };
         
-        CheckOutButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToCheckoutSection();
-            }
-        });
         
         BackToShopButton.addActionListener(new ActionListener() {
             @Override
@@ -69,13 +63,7 @@ public class HomePage extends javax.swing.JFrame {
                 switchToPreviousSection();
             }
         });
-        
-        BackToCartButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                switchToPreviousSection();
-            }
-        });
+
         
      ProduceBackButton.addActionListener(backButtonListener);
      BeverageBackButton.addActionListener(backButtonListener);
@@ -140,11 +128,6 @@ public class HomePage extends javax.swing.JFrame {
         currentPage = "card8";
     }
 
-    public void switchToCheckoutSection() {
-        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
-        cardLayout.show(getContentPane(), "card9");
-        currentPage = "card9";
-    }
 
     private void switchToPreviousSection() {
         System.out.println("Current Page: " + currentPage);
@@ -167,9 +150,6 @@ public class HomePage extends javax.swing.JFrame {
                 break;
             case "card8":
                 switchToCartSection();
-                break;
-            case "card9":
-                switchToCheckoutSection();
                 break;
             default:
                 // Default to the category section if the current page is unknown
@@ -221,12 +201,8 @@ public class HomePage extends javax.swing.JFrame {
         SeafoodBackButton = new com.app.assets.ColoredButton();
         SeafoodSection = new com.app.sections.SeafoodSection();
         CartPage = new javax.swing.JPanel();
-        CheckOutButton = new com.app.assets.ColoredButton();
         BackToShopButton = new com.app.assets.ColoredButton();
         CartMainPage = new com.app.transaction.CartSection();
-        CheckoutPage = new javax.swing.JPanel();
-        BackToCartButton = new com.app.assets.ColoredButton();
-        CheckOutSection = new com.app.transaction.CheckoutSection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -352,9 +328,6 @@ public class HomePage extends javax.swing.JFrame {
 
         CartPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CheckOutButton.setText("CHECKOUT");
-        CartPage.add(CheckOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 800, 420, 60));
-
         BackToShopButton.setText("<-");
         BackToShopButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BackToShopButton.setRadius(100);
@@ -362,16 +335,6 @@ public class HomePage extends javax.swing.JFrame {
         CartPage.add(CartMainPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CartPage, "card8");
-
-        CheckoutPage.setPreferredSize(new java.awt.Dimension(1280, 720));
-        CheckoutPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        BackToCartButton.setText("<-");
-        BackToCartButton.setRadius(100);
-        CheckoutPage.add(BackToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
-        CheckoutPage.add(CheckOutSection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        getContentPane().add(CheckoutPage, "card9");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -439,7 +402,6 @@ public class HomePage extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.app.assets.ColoredButton BackToCartButton;
     private com.app.assets.ColoredButton BackToShopButton;
     private com.app.assets.ColoredButton BeverageBackButton;
     private com.app.assets.ColoredButton BeverageGoToCartButton;
@@ -449,9 +411,6 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel CartPage;
     private javax.swing.JPanel CategoryPage;
     private com.app.sections.CategorySection CategorySection;
-    private com.app.assets.ColoredButton CheckOutButton;
-    private com.app.transaction.CheckoutSection CheckOutSection;
-    private javax.swing.JPanel CheckoutPage;
     private javax.swing.JLabel FreshProduceLabel;
     private com.app.assets.ColoredButton MeatBackButton;
     private com.app.assets.ColoredButton MeatGoToCartButton;
