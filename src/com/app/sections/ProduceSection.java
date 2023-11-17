@@ -27,7 +27,7 @@ public class ProduceSection extends javax.swing.JPanel {
 
     public ProduceSection() {
         initComponents();
-        
+        FoodStorage.getInstance().clear();
         FoodStorage.getInstance().addFoodItem(new FoodItem("1", "Apple", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
         FoodStorage.getInstance().addFoodItem(new FoodItem("2", "Banana", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
         FoodStorage.getInstance().addFoodItem(new FoodItem("3", "Kiwi", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
@@ -45,35 +45,35 @@ public class ProduceSection extends javax.swing.JPanel {
         ProduceSectionBG.add(orderPanel);
     }
 
-private void initializeUI() {
-    List<OrderPanel> foodNamePanels = Arrays.asList(ApplePanel, BananaPanel, CabbagePanel, KiwiPanel, PechayPanel, PotatoPanel);
-    List<FoodItem> foodItems = FoodStorage.getInstance().getFoodItems();
+    private void initializeUI() {
+        List<OrderPanel> foodNamePanels = Arrays.asList(ApplePanel, BananaPanel, CabbagePanel, KiwiPanel, PechayPanel, PotatoPanel);
+        List<FoodItem> foodItems = FoodStorage.getInstance().getFoodItems();
 
-    for (int i = 0; i < Math.min(foodNamePanels.size(), foodItems.size()); i++) {
-        OrderPanel foodNamePan = foodNamePanels.get(i);
-        FoodItem foodItem = foodItems.get(i);
+        for (int i = 0; i < Math.min(foodNamePanels.size(), foodItems.size()); i++) {
+            OrderPanel foodNamePan = foodNamePanels.get(i);
+            FoodItem foodItem = foodItems.get(i);
 
-        foodNamePan.setFoodName(foodItem.getName());
-        foodNamePan.setFoodDescription(foodItem.getDescription());
-        foodNamePan.setFoodPrice(foodItem.getPrice());  // Assuming getPrice() returns a double
-        foodNamePan.setOrderId(foodItem.getOrderId());
-        foodNamePan.setOrderImage(foodItem.getImageIcon());  // Assuming getImageIcon() returns the ImageIcon
+            foodNamePan.setFoodName(foodItem.getName());
+            foodNamePan.setFoodDescription(foodItem.getDescription());
+            foodNamePan.setFoodPrice(foodItem.getPrice());  // Assuming getPrice() returns a double
+            foodNamePan.setOrderId(foodItem.getOrderId());
+            foodNamePan.setOrderImage(foodItem.getImageIcon());  // Assuming getImageIcon() returns the ImageIcon
 
-        // Add the existing OrderPanel to the container
-        addOrderPanelToContainer(foodNamePan);
+            // Add the existing OrderPanel to the container
+            addOrderPanelToContainer(foodNamePan);
 
-        // Create the AddToCartListener here and add it to the CartButton
-        AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
-        
-        // Assuming you added the getCartButton method to your OrderPanel class
-        JButton cartButton = foodNamePan.getCartButton();
-        if (cartButton != null) {
-            cartButton.addActionListener(addToCartListener);
-        } else {
-            System.err.println("CartButton not found in OrderPanel.");
+            // Create the AddToCartListener here and add it to the CartButton
+            AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
+
+            // Assuming you added the getCartButton method to your OrderPanel class
+            JButton cartButton = foodNamePan.getCartButton();
+            if (cartButton != null) {
+                cartButton.addActionListener(addToCartListener);
+            } else {
+                System.err.println("CartButton not found in OrderPanel.");
+            }
         }
     }
-}
 
     private class AddToCartListener implements ActionListener {
     private FoodItem foodItem;

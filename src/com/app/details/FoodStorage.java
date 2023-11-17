@@ -35,4 +35,9 @@ public class FoodStorage {
         }
         return null; // Return null if no matching FoodItem is found
     }
+    
+    public void clear() {
+        foodItems.clear();
+    }
+    
 }

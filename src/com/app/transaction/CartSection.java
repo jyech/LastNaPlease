@@ -10,6 +10,8 @@ import java.util.List;
 import javax.swing.JPanel;
 import com.app.assets.CartOrderPanel;
 import com.app.assets.ProductDetailsPanel;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.Box;
 import javax.swing.SwingUtilities;
 import javax.swing.JLabel;
@@ -32,13 +34,13 @@ public class CartSection extends javax.swing.JPanel {
 
     public void displayCartItems(List<FoodItem> cartItems) {
     // Clear the existing items in the JScrollPane
-    int totalQuantity = calculateTotalQuantity(cartItems);
+    int uniqueItemsCount = calculateUniqueItemsCount(cartItems);
     JPanel cartOrderPanelContainer = new JPanel();
     cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
 
     for (FoodItem item : cartItems) {
         if (item.getUserQuantity() >= 1) {
-        // Create a CartOrderPanel with information and add it to the container
+            // Create a CartOrderPanel with information and add it to the container
             ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(
                     item.getName(),
                     item.getPrice(),
@@ -47,15 +49,18 @@ public class CartSection extends javax.swing.JPanel {
             cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
             cartOrderPanel.setOrderImage(item.getImageIcon());
             cartOrderPanelContainer.add(cartOrderPanel);
-            TotalQuantityLabel.setText(totalQuantity + " Items");
         }
     }
+
     // Add vertical glue to push CartOrderPanel instances to the top
     cartOrderPanelContainer.add(Box.createVerticalGlue());
 
     // Add the container to the existing JScrollPane
     OrderScrollPane.setViewportView(cartOrderPanelContainer);
     OrderScrollPane.setAlignmentX(LEFT_ALIGNMENT);  // Ensure the alignment is set to the left
+
+    // Display the total number of unique items
+    TotalQuantityLabel.setText(uniqueItemsCount + " Items");
 
     revalidate();
     repaint();
@@ -66,16 +71,18 @@ public class CartSection extends javax.swing.JPanel {
 
 
 
-    private int calculateTotalQuantity(List<FoodItem> cartItems) {
-        int totalQuantity = 0;
+    private int calculateUniqueItemsCount(List<FoodItem> cartItems) {
+        // Use a set to store unique food item names
+        Set<String> uniqueItemNames = new HashSet<>();
 
         for (FoodItem item : cartItems) {
             if (item.getUserQuantity() >= 1) {
-                totalQuantity += item.getUserQuantity();
+                uniqueItemNames.add(item.getName());
             }
         }
 
-        return totalQuantity;
+        // Return the count of unique food items
+        return uniqueItemNames.size();
     }
 
 
