@@ -29,11 +29,11 @@ public class CategorySection extends javax.swing.JPanel {
         SeafoodCategory.setCategoryName("Seafood");
         
         // Set images for each category
-        ProduceCategory.setCategoryImage("/com/app/images/freshproduce.jpg");
-        BeverageCategory.setCategoryImage("/com/app/images/beverages.jpg");
-        SnackCategory.setCategoryImage("/com/app/images/snacks.jpg");
-        MeatCategory.setCategoryImage("/com/app/images/meat.jpg");
-        SeafoodCategory.setCategoryImage("/com/app/images/seafood.jpg");
+        ProduceCategory.setCategoryImage("/com/app/images/freshproducecategory.png");
+        BeverageCategory.setCategoryImage("/com/app/images/beverage.png");
+        SnackCategory.setCategoryImage("/com/app/images/snackscategory.png");
+        MeatCategory.setCategoryImage("/com/app/images/meatcategory.png");
+        SeafoodCategory.setCategoryImage("/com/app/images/fishcategory.png");
         
         ProduceButton.addActionListener(new ActionListener() {
             @Override

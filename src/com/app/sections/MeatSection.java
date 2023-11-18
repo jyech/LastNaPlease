@@ -28,15 +28,15 @@ public class MeatSection extends javax.swing.JPanel {
     public MeatSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("22", "Chicken Wings", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Lays Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("23", "Chicken Legs", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Doritos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("24", "Chicken Breast", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Nova Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("25", "Pork Tenga", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Lays Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("26", "Pork Liempo", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Doritos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("27", "Pork Ribs", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Nova Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("28", "Pork Brisket", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Lays Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("29", "Beef Shank", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Doritos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("30", "Beef Sirloin", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Nova Description"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("22", "Chicken Wings", new ImageIcon(getClass().getResource("/com/app/images/chickenwing.png")), 104.88, "Poultry"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("23", "Chicken Legs", new ImageIcon(getClass().getResource("/com/app/images/chickenleg.png")), 104.88, "Poultry"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("24", "Whole Chicken", new ImageIcon(getClass().getResource("/com/app/images/wholechicken.png")), 580.0, "Poultry"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("25", "Pork Sausage", new ImageIcon(getClass().getResource("/com/app/images/sausage.png")), 280.0, "Ground Pork with Spices"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("26", "Pork Ham", new ImageIcon(getClass().getResource("/com/app/images/ham.png")), 320.0, "Cured Pork"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("27", "Pork Ribs", new ImageIcon(getClass().getResource("/com/app/images/ribs.png")), 440.0, "Pork Cut"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("28", "Beef Cubes", new ImageIcon(getClass().getResource("/com/app/images/beefcubes.png")), 280.0, "Beef Cut"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("29", "Beef Steak", new ImageIcon(getClass().getResource("/com/app/images/steak.png")), 489.0, "Beef Cut"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("30", "Beef Patty", new ImageIcon(getClass().getResource("/com/app/images/groundbeef.png")), 345.0, "Beef Cut"));
         
         initializeUI();
     }

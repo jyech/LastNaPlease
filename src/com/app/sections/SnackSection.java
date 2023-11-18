@@ -28,11 +28,11 @@ public class SnackSection extends javax.swing.JPanel {
     public SnackSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("12", "Lays", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Lays Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("13", "Doritos", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Doritos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("14", "Nova", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Nova Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("15", "Piattos", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Piattos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("16", "Pringles", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Pringles Description"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("12", "Lays", new ImageIcon(getClass().getResource("/com/app/images/lays.png")), 120.0, "Potato Chips"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("13", "Popcorn", new ImageIcon(getClass().getResource("/com/app/images/popcorn.png")), 110.0, "Kernel Corn"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("14", "Nova", new ImageIcon(getClass().getResource("/com/app/images/nova.png")), 80.0, "Local Snack"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("15", "Lollipop", new ImageIcon(getClass().getResource("/com/app/images/lollipop.png")), 35.0, "Sweet Treat"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("16", "Honey Butter Chips", new ImageIcon(getClass().getResource("/com/app/images/honeybutterchips.png")), 97.0, "Potato Chips"));
         
         initializeUI();
     }
@@ -115,6 +115,7 @@ public class SnackSection extends javax.swing.JPanel {
         PiattosPanel = new com.app.assets.OrderPanel();
         PringlesPanel = new com.app.assets.OrderPanel();
 
+        setBackground(new java.awt.Color(145, 196, 131));
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
         SnackSectionBG.setBackground(new java.awt.Color(241, 242, 237));

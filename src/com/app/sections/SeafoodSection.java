@@ -28,11 +28,11 @@ public class SeafoodSection extends javax.swing.JPanel {
     public SeafoodSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("17", "Tilapia", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Lays Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("18", "Bangus", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Doritos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("19", "Lapu-Lapu", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Nova Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("20", "Galunggong", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Piattos Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("21", "Salmon", new ImageIcon(getClass().getResource("/com/app/images/foodimage.png")), 20.0, "Pringles Description"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("17", "Lobster", new ImageIcon(getClass().getResource("/com/app/images/lobster.png")), 110.0, "Seafood"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("18", "Octopus", new ImageIcon(getClass().getResource("/com/app/images/octopus.png")), 220.0, "Seafood"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("19", "Salmon", new ImageIcon(getClass().getResource("/com/app/images/salmon.png")), 250.0, "Seafood"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("20", "Shrimp", new ImageIcon(getClass().getResource("/com/app/images/shrimp.png")), 180.0, "Seafood"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("21", "Squid", new ImageIcon(getClass().getResource("/com/app/images/squid.png")), 120.0, "Seafood"));
         
         initializeUI();
     }
@@ -110,6 +110,7 @@ public class SeafoodSection extends javax.swing.JPanel {
         GalunggongPanel = new com.app.assets.OrderPanel();
         SalmonPanel = new com.app.assets.OrderPanel();
 
+        setBackground(new java.awt.Color(145, 196, 131));
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
         SnackSectionBG.setBackground(new java.awt.Color(241, 242, 237));

@@ -28,11 +28,11 @@ public class BeverageSection extends javax.swing.JPanel {
     public BeverageSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("7", "Coke", new ImageIcon(getClass().getResource("/com/app/images/soju.png")), 20.0, "Coke Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("8", "Cowhead", new ImageIcon(getClass().getResource("/com/app/images/soju.png")), 20.0, "Cowhead Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("9", "Soju", new ImageIcon(getClass().getResource("/com/app/images/soju.png")), 20.0, "Soju Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("10", "Yakult", new ImageIcon(getClass().getResource("/com/app/images/soju.png")), 20.0, "Yakult Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("11", "Chuckie", new ImageIcon(getClass().getResource("/com/app/images/soju.png")), 20.0, "Chuckie Description"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("7", "Coke", new ImageIcon(getClass().getResource("/com/app/images/coke.png")), 33.0, "Carbonated Drink"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("8", "Milk", new ImageIcon(getClass().getResource("/com/app/images/milk.png")), 99.0, "Dairy Cow's Milk"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("9", "Soju", new ImageIcon(getClass().getResource("/com/app/images/sojus.png")), 102.0, "Distilled Alcoholic Drink"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("10", "Yakult", new ImageIcon(getClass().getResource("/com/app/images/yakult.png")), 53.0, "Probiotic Drink"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("11", "Sprite", new ImageIcon(getClass().getResource("/com/app/images/sprite.png")), 30.0, "Carbonated Drink"));
         
         initializeUI();
     }

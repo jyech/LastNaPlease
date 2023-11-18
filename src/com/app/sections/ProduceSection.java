@@ -28,12 +28,12 @@ public class ProduceSection extends javax.swing.JPanel {
     public ProduceSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("1", "Apple", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("2", "Banana", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("3", "Kiwi", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("4", "Cabbage", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("5", "Potato", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("6", "Pechay", new ImageIcon(getClass().getResource("/com/app/images/apple.png")), 20.0, "Apple Description"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("1", "Apple", new ImageIcon(getClass().getResource("/com/app/images/apples.png")), 80.0, "Fruit"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("2", "Banana", new ImageIcon(getClass().getResource("/com/app/images/banana.png")), 88.0, "Fruit"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("3", "Dragonfruit", new ImageIcon(getClass().getResource("/com/app/images/dragonfruit.png")), 120.0, "Fruit"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("4", "Cauliflower", new ImageIcon(getClass().getResource("/com/app/images/cauliflower.png")), 75.0, "Fruit"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("5", "Lemon", new ImageIcon(getClass().getResource("/com/app/images/lemon.png")), 51.0, "Fruit"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("6", "Mango", new ImageIcon(getClass().getResource("/com/app/images/mango.png")), 96.0, "Fruit"));
         // Add more food items as needed
         
         // Initialize UI components based on the food items in FoodStorage
