@@ -125,7 +125,7 @@ public class ProduceSection extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
-        ProduceSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        ProduceSectionBG.setBackground(new java.awt.Color(145, 196, 131));
 
         FreshProduceLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         FreshProduceLabel.setText("Fresh Produce");

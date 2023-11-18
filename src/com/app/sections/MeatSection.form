@@ -38,7 +38,7 @@
     <Container class="javax.swing.JPanel" name="MeatSectionBG">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ed" green="f2" red="f1" type="rgb"/>
+          <Color blue="83" green="c4" red="91" type="rgb"/>
         </Property>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[1600, 12]"/>
@@ -56,23 +56,23 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Component id="ChickenWingsPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                           <Component id="ChickenLegsPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="ChickenBreastPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="PorkTengaPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                           <Component id="PorkLiempoPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="PorkRibsPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="BeefBrisketPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="95" pref="95" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
                           <Component id="BeefShankPanel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="105" pref="105" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
                           <Component id="BeefSirloinPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -105,11 +105,9 @@
                       <Component id="BeefSirloinPanel" min="-2" max="-2" attributes="0"/>
                       <Group type="102" attributes="0">
                           <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="BeefBrisketPanel" min="-2" max="-2" attributes="0"/>
-                              <Component id="BeefShankPanel" min="-2" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="BeefBrisketPanel" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="BeefShankPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>

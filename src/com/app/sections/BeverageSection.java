@@ -113,7 +113,7 @@ public class BeverageSection extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
-        BeverageSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        BeverageSectionBG.setBackground(new java.awt.Color(145, 196, 131));
 
         BeveragesLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         BeveragesLabel.setText("Beverages");

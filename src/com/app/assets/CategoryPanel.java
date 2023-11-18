@@ -54,6 +54,7 @@ public class CategoryPanel extends javax.swing.JPanel {
         PictureBox.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/seafood.jpg"))); // NOI18N
         PictureBox.setPreferredSize(new java.awt.Dimension(220, 320));
 
+        CategoryName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         CategoryName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         CategoryName.setText("CATEGORY NAME");
 
@@ -75,7 +76,7 @@ public class CategoryPanel extends javax.swing.JPanel {
                 .addComponent(PictureBox, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(CategoryName)
-                .addGap(0, 66, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

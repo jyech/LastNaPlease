@@ -63,6 +63,13 @@ public class HomePage extends javax.swing.JFrame {
                 switchToPreviousSection();
             }
         });
+        
+        CheckOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchToCheckoutSection();
+            }
+        });
 
         
      ProduceBackButton.addActionListener(backButtonListener);
@@ -119,7 +126,7 @@ public class HomePage extends javax.swing.JFrame {
         cardLayout.show(getContentPane(), "card2");
         currentPage = "card2";
     }
-
+    
     public void switchToCartSection() {
         previousPage = currentPage;
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
@@ -127,6 +134,15 @@ public class HomePage extends javax.swing.JFrame {
         cartSection.displayCartItems(cartItems);
         currentPage = "card8";
     }
+
+    public void switchToCheckoutSection() {
+        previousPage = currentPage;
+        CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
+        cardLayout.show(getContentPane(), "card9");
+        currentPage = "card9";
+    }
+    
+    
 
 
     private void switchToPreviousSection() {
@@ -176,6 +192,7 @@ public class HomePage extends javax.swing.JFrame {
     private void initComponents() {
 
         CategoryPage = new javax.swing.JPanel();
+        CheckOutButton = new com.app.assets.ColoredButton();
         CategorySection = new com.app.sections.CategorySection();
         ProducePage = new javax.swing.JPanel();
         ProduceGoToCartButton = new com.app.assets.ColoredButton();
@@ -203,32 +220,29 @@ public class HomePage extends javax.swing.JFrame {
         CartPage = new javax.swing.JPanel();
         BackToShopButton = new com.app.assets.ColoredButton();
         CartMainPage = new com.app.transaction.CartSection();
+        CheckoutPage = new javax.swing.JPanel();
+        checkoutSection1 = new com.app.transaction.CheckoutSection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
         CategoryPage.setPreferredSize(new java.awt.Dimension(1280, 720));
+        CategoryPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        CheckOutButton.setText("CHECKOUT");
+        CheckOutButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        CategoryPage.add(CheckOutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 700, 250, 80));
 
         CategorySection.setMaximumSize(new java.awt.Dimension(1600, 900));
         CategorySection.setMinimumSize(new java.awt.Dimension(1600, 900));
-
-        javax.swing.GroupLayout CategoryPageLayout = new javax.swing.GroupLayout(CategoryPage);
-        CategoryPage.setLayout(CategoryPageLayout);
-        CategoryPageLayout.setHorizontalGroup(
-            CategoryPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        CategoryPageLayout.setVerticalGroup(
-            CategoryPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(CategorySection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        CategoryPage.add(CategorySection, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CategoryPage, "card2");
 
         ProducePage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        ProduceGoToCartButton.setText("C");
+        ProduceGoToCartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/shoppingcart.png"))); // NOI18N
         ProduceGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         ProduceGoToCartButton.setRadius(100);
         ProducePage.add(ProduceGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
@@ -243,7 +257,7 @@ public class HomePage extends javax.swing.JFrame {
 
         BeveragePage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        BeverageGoToCartButton.setText("C");
+        BeverageGoToCartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/shoppingcart.png"))); // NOI18N
         BeverageGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BeverageGoToCartButton.setRadius(100);
         BeveragePage.add(BeverageGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
@@ -258,7 +272,7 @@ public class HomePage extends javax.swing.JFrame {
         SnackPage.setPreferredSize(new java.awt.Dimension(1280, 720));
         SnackPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SnackGoToCartButton.setText("C");
+        SnackGoToCartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/shoppingcart.png"))); // NOI18N
         SnackGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SnackGoToCartButton.setRadius(100);
         SnackPage.add(SnackGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
@@ -272,7 +286,7 @@ public class HomePage extends javax.swing.JFrame {
 
         MeatPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        MeatGoToCartButton.setText("C");
+        MeatGoToCartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/shoppingcart.png"))); // NOI18N
         MeatGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         MeatGoToCartButton.setRadius(100);
         MeatPage.add(MeatGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
@@ -281,7 +295,7 @@ public class HomePage extends javax.swing.JFrame {
         MeatBackButton.setRadius(100);
         MeatPage.add(MeatBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
 
-        ProduceSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        ProduceSectionBG.setBackground(new java.awt.Color(145, 196, 131));
 
         FreshProduceLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         FreshProduceLabel.setText("Meat");
@@ -314,7 +328,7 @@ public class HomePage extends javax.swing.JFrame {
 
         SeafoodPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SeafoodGoToCartButton.setText("C");
+        SeafoodGoToCartButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/shoppingcart.png"))); // NOI18N
         SeafoodGoToCartButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SeafoodGoToCartButton.setRadius(100);
         SeafoodPage.add(SeafoodGoToCartButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1420, 40, 50, 50));
@@ -335,6 +349,25 @@ public class HomePage extends javax.swing.JFrame {
         CartPage.add(CartMainPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CartPage, "card8");
+
+        javax.swing.GroupLayout CheckoutPageLayout = new javax.swing.GroupLayout(CheckoutPage);
+        CheckoutPage.setLayout(CheckoutPageLayout);
+        CheckoutPageLayout.setHorizontalGroup(
+            CheckoutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CheckoutPageLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(checkoutSection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        CheckoutPageLayout.setVerticalGroup(
+            CheckoutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckoutPageLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(checkoutSection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
+        );
+
+        getContentPane().add(CheckoutPage, "card9");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -411,6 +444,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel CartPage;
     private javax.swing.JPanel CategoryPage;
     private com.app.sections.CategorySection CategorySection;
+    private com.app.assets.ColoredButton CheckOutButton;
+    private javax.swing.JPanel CheckoutPage;
     private javax.swing.JLabel FreshProduceLabel;
     private com.app.assets.ColoredButton MeatBackButton;
     private com.app.assets.ColoredButton MeatGoToCartButton;
@@ -428,6 +463,7 @@ public class HomePage extends javax.swing.JFrame {
     private com.app.assets.ColoredButton SnackGoToCartButton;
     private javax.swing.JPanel SnackPage;
     private com.app.sections.SnackSection SnackSection;
+    private com.app.transaction.CheckoutSection checkoutSection1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.app.sections.MeatSection meatSection2;
     // End of variables declaration//GEN-END:variables

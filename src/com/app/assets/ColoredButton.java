@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.app.assets;
 
 import java.awt.Color;
@@ -68,35 +64,42 @@ public class ColoredButton extends JButton {
 
         setColor(Color.WHITE);
         colorOver = new Color(193, 225, 193);
-        colorClick = new Color(156,175,136);
-        borderColor = new Color(156,175,136);
+        colorClick = new Color(156, 175, 136);
+        borderColor = new Color(156, 175, 136);
         setContentAreaFilled(false);
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
-                setBackground(colorOver);
-                over = true;
+                if (isEnabled()) {
+                    setBackground(colorOver);
+                    over = true;
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
-                setBackground(color);
-                over = false;
-
+                if (isEnabled()) {
+                    setBackground(color);
+                    over = false;
+                }
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
-                setBackground(colorClick);
+                if (isEnabled()) {
+                    setBackground(colorClick);
+                }
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                if (over) {
-                    setBackground(colorOver);
-                } else {
-                    setBackground(color);
+                if (isEnabled()) {
+                    if (over) {
+                        setBackground(colorOver);
+                    } else {
+                        setBackground(color);
+                    }
                 }
             }
         });

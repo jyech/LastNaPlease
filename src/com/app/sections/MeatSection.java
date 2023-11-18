@@ -128,7 +128,7 @@ public class MeatSection extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1600, 1150));
 
-        MeatSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        MeatSectionBG.setBackground(new java.awt.Color(145, 196, 131));
         MeatSectionBG.setPreferredSize(new java.awt.Dimension(1600, 12));
 
         BeefLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -158,21 +158,21 @@ public class MeatSection extends javax.swing.JPanel {
                 .addGroup(MeatSectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(MeatSectionBGLayout.createSequentialGroup()
                         .addComponent(ChickenWingsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addGap(118, 118, 118)
                         .addComponent(ChickenLegsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addGap(72, 72, 72)
                         .addComponent(ChickenBreastPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MeatSectionBGLayout.createSequentialGroup()
                         .addComponent(PorkTengaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addGap(118, 118, 118)
                         .addComponent(PorkLiempoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addGap(72, 72, 72)
                         .addComponent(PorkRibsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(MeatSectionBGLayout.createSequentialGroup()
                         .addComponent(BeefBrisketPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
+                        .addGap(118, 118, 118)
                         .addComponent(BeefShankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(105, 105, 105)
+                        .addGap(72, 72, 72)
                         .addComponent(BeefSirloinPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         MeatSectionBGLayout.setVerticalGroup(
@@ -199,9 +199,8 @@ public class MeatSection extends javax.swing.JPanel {
                     .addComponent(BeefSirloinPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(MeatSectionBGLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addGroup(MeatSectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BeefBrisketPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BeefShankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(BeefBrisketPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BeefShankPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

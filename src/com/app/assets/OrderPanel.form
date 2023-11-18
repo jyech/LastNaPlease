@@ -35,7 +35,7 @@
     <Container class="javax.swing.JPanel" name="OrderPanelBG">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ed" green="f2" red="f1" type="rgb"/>
+          <Color blue="83" green="c4" red="91" type="rgb"/>
         </Property>
       </Properties>
 
@@ -52,14 +52,14 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="200" y="30" width="210" height="-1"/>
+              <AbsoluteConstraints x="160" y="30" width="250" height="-1"/>
             </Constraint>
           </Constraints>
         </Component>
         <Container class="javax.swing.JPanel" name="OrderPanel">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="c7" green="d4" red="d6" type="rgb"/>
+              <Color blue="ee" green="ee" red="ee" type="rgb"/>
             </Property>
           </Properties>
           <Constraints>
@@ -72,31 +72,22 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="QuantityLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="FoodDescription" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="FoodName" min="-2" pref="183" max="-2" attributes="0"/>
+                          <Component id="FoodPrice" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="FoodDescription" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <Component id="FoodName" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <Component id="FoodPrice" alignment="0" min="-2" pref="183" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="QuantityLabel" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="MinusButton" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="Quantity" min="-2" pref="33" max="-2" attributes="0"/>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="plusButton" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
+                              <Component id="MinusButton" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="Quantity" min="-2" pref="33" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="plusButton" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="CartButton" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="112" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="CartButton" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="137" max="32767" attributes="0"/>
+                      <EmptySpace pref="132" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -110,15 +101,16 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="FoodPrice" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="QuantityLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="QuantityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="MinusButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="plusButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="MinusButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Quantity" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="CartButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="39" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -190,8 +182,11 @@
             </Component>
             <Component class="com.app.assets.ColoredButton" name="CartButton">
               <Properties>
-                <Property name="text" type="java.lang.String" value="CART"/>
+                <Property name="text" type="java.lang.String" value="Add To Cart"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CartButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

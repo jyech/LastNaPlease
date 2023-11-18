@@ -8,7 +8,6 @@ import com.app.details.FoodItem;
 import java.awt.FlowLayout;
 import java.util.List;
 import javax.swing.JPanel;
-import com.app.assets.CartOrderPanel;
 import com.app.assets.ProductDetailsPanel;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -160,7 +159,11 @@ private int calculateUniqueItemsCount(List<FoodItem> cartItems) {
         double change = paymentAmount - totalAmount;
 
         // Set the ChangeTextfield to display the change
-        ChangeTextfield.setText(String.format("%.2f", change));
+        if (totalAmount > paymentAmount){
+            ChangeTextfield.setText("Invalid ");
+        } else {
+            ChangeTextfield.setText(String.format("%.2f", change));
+        }
     }
 
 

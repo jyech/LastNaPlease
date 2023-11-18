@@ -118,7 +118,7 @@ public class SnackSection extends javax.swing.JPanel {
         setBackground(new java.awt.Color(145, 196, 131));
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
-        SnackSectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        SnackSectionBG.setBackground(new java.awt.Color(145, 196, 131));
 
         SnacksLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         SnacksLabel.setText("Snacks");

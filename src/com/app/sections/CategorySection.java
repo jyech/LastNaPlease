@@ -107,14 +107,14 @@ public class CategorySection extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1600, 900));
 
-        CategorySectionBG.setBackground(new java.awt.Color(241, 242, 237));
+        CategorySectionBG.setBackground(new java.awt.Color(145, 196, 131));
         CategorySectionBG.setMaximumSize(new java.awt.Dimension(1600, 900));
         CategorySectionBG.setPreferredSize(new java.awt.Dimension(1600, 900));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setText("Browse by Category");
 
-        ProducePanel.setBackground(new java.awt.Color(241, 242, 237));
+        ProducePanel.setBackground(new java.awt.Color(145, 196, 131));
 
         ProduceButton.setText("Fresh Produce");
         ProduceButton.setPreferredSize(new java.awt.Dimension(220, 320));
@@ -146,7 +146,7 @@ public class CategorySection extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        BeveragePanel.setBackground(new java.awt.Color(241, 242, 237));
+        BeveragePanel.setBackground(new java.awt.Color(145, 196, 131));
 
         BeverageButton.setText("Fresh Produce");
         BeverageButton.setPreferredSize(new java.awt.Dimension(220, 320));
@@ -178,7 +178,7 @@ public class CategorySection extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        SnackPanel.setBackground(new java.awt.Color(241, 242, 237));
+        SnackPanel.setBackground(new java.awt.Color(145, 196, 131));
 
         SnackButton.setText("Fresh Produce");
         SnackButton.setPreferredSize(new java.awt.Dimension(220, 320));
@@ -210,7 +210,7 @@ public class CategorySection extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        MeatPanel.setBackground(new java.awt.Color(241, 242, 237));
+        MeatPanel.setBackground(new java.awt.Color(145, 196, 131));
 
         MeatButton.setText("Fresh Produce");
         MeatButton.setPreferredSize(new java.awt.Dimension(220, 320));
@@ -242,7 +242,7 @@ public class CategorySection extends javax.swing.JPanel {
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
-        SeafoodPanel.setBackground(new java.awt.Color(241, 242, 237));
+        SeafoodPanel.setBackground(new java.awt.Color(145, 196, 131));
 
         SeafoodButton.setText("Fresh Produce");
         SeafoodButton.setPreferredSize(new java.awt.Dimension(220, 320));
@@ -279,15 +279,15 @@ public class CategorySection extends javax.swing.JPanel {
         CategorySectionBGLayout.setHorizontalGroup(
             CategorySectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CategorySectionBGLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(58, 58, 58)
                 .addGroup(CategorySectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(CategorySectionBGLayout.createSequentialGroup()
                         .addComponent(ProducePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(90, 90, 90)
                         .addComponent(BeveragePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(65, 65, 65)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(SnackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
+                        .addGap(70, 70, 70)
                         .addComponent(MeatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(90, 90, 90)
                         .addComponent(SeafoodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -305,7 +305,7 @@ public class CategorySection extends javax.swing.JPanel {
                 .addGroup(CategorySectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(SeafoodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(CategorySectionBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(BeveragePanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(BeveragePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(ProducePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(SnackPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MeatPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
