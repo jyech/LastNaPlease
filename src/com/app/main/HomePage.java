@@ -32,6 +32,7 @@ public class HomePage extends javax.swing.JFrame {
     private CartSection cartSection;
     private String currentPage; 
     private String previousPage;
+    private OrderPanel orderPanel;
    
     public HomePage() {
         initComponents();
@@ -64,7 +65,15 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
         
+        
         CheckOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                switchToCheckoutSection();
+            }
+        });
+        
+        CartCheckoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchToCheckoutSection();
@@ -77,6 +86,7 @@ public class HomePage extends javax.swing.JFrame {
      SnackBackButton.addActionListener(backButtonListener);   
      MeatBackButton.addActionListener(backButtonListener);
      SeafoodBackButton.addActionListener(backButtonListener);
+     BackCheckoutButton.addActionListener(backButtonListener);
      ProduceGoToCartButton.addActionListener(cartSwitchListener);
      BeverageGoToCartButton.addActionListener(cartSwitchListener);
      SnackGoToCartButton.addActionListener(cartSwitchListener);
@@ -219,11 +229,14 @@ public class HomePage extends javax.swing.JFrame {
         SeafoodSection = new com.app.sections.SeafoodSection();
         CartPage = new javax.swing.JPanel();
         BackToShopButton = new com.app.assets.ColoredButton();
+        CartCheckoutButton = new com.app.assets.ColoredButton();
         CartMainPage = new com.app.transaction.CartSection();
         CheckoutPage = new javax.swing.JPanel();
-        checkoutSection1 = new com.app.transaction.CheckoutSection();
+        BackCheckoutButton = new com.app.assets.ColoredButton();
+        CheckoutBackButton = new com.app.transaction.CheckoutSection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(1600, 900));
         setResizable(false);
         getContentPane().setLayout(new java.awt.CardLayout());
 
@@ -340,32 +353,26 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(SeafoodPage, "card7");
 
+        CartPage.setPreferredSize(new java.awt.Dimension(1600, 900));
         CartPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         BackToShopButton.setText("<-");
-        BackToShopButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BackToShopButton.setRadius(100);
-        CartPage.add(BackToShopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, 50));
+        CartPage.add(BackToShopButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, 50, 50));
+
+        CartCheckoutButton.setText("CHECKOUT");
+        CartPage.add(CartCheckoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 820, 370, 50));
         CartPage.add(CartMainPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CartPage, "card8");
 
-        javax.swing.GroupLayout CheckoutPageLayout = new javax.swing.GroupLayout(CheckoutPage);
-        CheckoutPage.setLayout(CheckoutPageLayout);
-        CheckoutPageLayout.setHorizontalGroup(
-            CheckoutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(CheckoutPageLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(checkoutSection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        CheckoutPageLayout.setVerticalGroup(
-            CheckoutPageLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CheckoutPageLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(checkoutSection1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0))
-        );
+        CheckoutPage.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        BackCheckoutButton.setText("<-");
+        BackCheckoutButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        BackCheckoutButton.setRadius(100);
+        CheckoutPage.add(BackCheckoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, 50));
+        CheckoutPage.add(CheckoutBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CheckoutPage, "card9");
 
@@ -435,16 +442,19 @@ public class HomePage extends javax.swing.JFrame {
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.app.assets.ColoredButton BackCheckoutButton;
     private com.app.assets.ColoredButton BackToShopButton;
     private com.app.assets.ColoredButton BeverageBackButton;
     private com.app.assets.ColoredButton BeverageGoToCartButton;
     private javax.swing.JPanel BeveragePage;
     private com.app.sections.BeverageSection BeverageSection;
+    private com.app.assets.ColoredButton CartCheckoutButton;
     private com.app.transaction.CartSection CartMainPage;
     private javax.swing.JPanel CartPage;
     private javax.swing.JPanel CategoryPage;
     private com.app.sections.CategorySection CategorySection;
     private com.app.assets.ColoredButton CheckOutButton;
+    private com.app.transaction.CheckoutSection CheckoutBackButton;
     private javax.swing.JPanel CheckoutPage;
     private javax.swing.JLabel FreshProduceLabel;
     private com.app.assets.ColoredButton MeatBackButton;
@@ -463,7 +473,6 @@ public class HomePage extends javax.swing.JFrame {
     private com.app.assets.ColoredButton SnackGoToCartButton;
     private javax.swing.JPanel SnackPage;
     private com.app.sections.SnackSection SnackSection;
-    private com.app.transaction.CheckoutSection checkoutSection1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.app.sections.MeatSection meatSection2;
     // End of variables declaration//GEN-END:variables

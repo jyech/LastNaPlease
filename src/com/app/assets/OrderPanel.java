@@ -10,9 +10,12 @@ import com.app.transaction.CartSection;
 import com.app.transaction.OrderPanelListener;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 /**
  *
@@ -91,6 +94,11 @@ public class OrderPanel extends javax.swing.JPanel {
         // Convert the double value to a formatted string if needed
         String formattedPrice = String.format("%.2f", foodPrice);
         FoodPrice.setText(formattedPrice);
+    }
+    
+    public void enableCartButton() {
+        CartButton.setEnabled(true);
+        CartButton.setText("Add To Cart"); // Reset the text if needed
     }
 
     /**
@@ -239,7 +247,17 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void CartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartButtonActionPerformed
         CartButton.setText("Added to Cart");
-        CartButton.setEnabled(false);
+
+        // Schedule a task to reset the text after a delay (e.g., 2000 milliseconds = 2 seconds)
+        int delay = 2000; // milliseconds
+        ActionListener taskPerformer = new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                CartButton.setText("Add To Cart");
+            }
+        };
+        Timer timer = new Timer(delay, taskPerformer);
+        timer.setRepeats(false); // Set to false to execute the task only once
+        timer.start();
     }//GEN-LAST:event_CartButtonActionPerformed
 
 

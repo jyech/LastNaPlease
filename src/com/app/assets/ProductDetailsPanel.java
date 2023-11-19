@@ -5,7 +5,9 @@
 package com.app.assets;
 
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 /**
  *
@@ -40,17 +42,22 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         Quantity.setText(String.valueOf(foodQuantity));
 
         // Debugging print statements
-        System.out.println("Creating CartOrderPanel for: " + foodName);
-
         // Update the total label after setting initial values
         updateTotalLabel();
+        
+    }
+    
+    public JButton getRemoveButton() {
+        return RemoveButton;
     }
 
-    // Existing code...
+    public void setRemoveButtonAction(ActionListener actionListener) {
+        RemoveButton.addActionListener(actionListener);
+    }
 
     public void setOrderImage(ImageIcon imageIcon) {
         // Set the image for the PictureBox
-        Image scaledImage = imageIcon.getImage().getScaledInstance(150, 150, Image.SCALE_DEFAULT);
+        Image scaledImage = imageIcon.getImage().getScaledInstance(220, 220, Image.SCALE_DEFAULT);
         FoodImage.setIcon(new ImageIcon(scaledImage));
 
         // Update the total label when setting the image
@@ -63,10 +70,12 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
    
     private void updateTotalLabel() {
         double total = calculateTotal();
+        foodTotal = total; // Update the foodTotal variable
         FoodTotal.setText(String.format("%.2f", total));
         revalidate();
         repaint();
     }
+
    
         public double calculateTotal() {
         return foodPrice * getQuantity();
@@ -80,16 +89,19 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         this.quantityChangeListener = listener;
     }
     
-    public void updateQuantity(int newQuantity) {
-        this.foodQuantity = newQuantity;
-        Quantity.setText(String.valueOf(foodQuantity));
-        updateTotalLabel();
+  public void updateQuantity(int newQuantity) {
+    this.foodQuantity = newQuantity;
+    Quantity.setText(String.valueOf(foodQuantity));
 
-        if (quantityChangeListener != null) {
-            quantityChangeListener.onQuantityChanged(foodName, newQuantity);
-        }
+    if (quantityChangeListener != null) {
+        quantityChangeListener.onQuantityChanged(foodName, newQuantity);
     }
-    
+
+    // Update the total label here after the quantity change
+    updateTotalLabel();
+}
+
+   
     public String getFoodName() {
         return foodName;
     }
@@ -109,57 +121,59 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         FoodPrice = new javax.swing.JLabel();
         FoodName = new javax.swing.JLabel();
         Quantity = new javax.swing.JLabel();
-        FoodTotal = new javax.swing.JLabel();
         plusButton = new com.app.assets.ColoredButton();
         MinusButton = new com.app.assets.ColoredButton();
+        FoodTotal = new javax.swing.JLabel();
+        RemoveButton = new com.app.assets.TextButton();
 
-        setPreferredSize(new java.awt.Dimension(1100, 237));
+        setPreferredSize(new java.awt.Dimension(1600, 300));
 
         DetailsBG.setBackground(new java.awt.Color(241, 242, 237));
         DetailsBG.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         DetailsBG.setPreferredSize(new java.awt.Dimension(1100, 237));
+        DetailsBG.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         ImageBG.setBackground(new java.awt.Color(232, 205, 90));
         ImageBG.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
-        ImageBG.setPreferredSize(new java.awt.Dimension(200, 200));
+        ImageBG.setPreferredSize(new java.awt.Dimension(250, 250));
 
         FoodImage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         FoodImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/app/images/foodimage.png"))); // NOI18N
-        FoodImage.setPreferredSize(new java.awt.Dimension(200, 200));
+        FoodImage.setPreferredSize(new java.awt.Dimension(220, 220));
 
         javax.swing.GroupLayout ImageBGLayout = new javax.swing.GroupLayout(ImageBG);
         ImageBG.setLayout(ImageBGLayout);
         ImageBGLayout.setHorizontalGroup(
             ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ImageBGLayout.createSequentialGroup()
-                    .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, 196, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImageBGLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, 232, Short.MAX_VALUE)
+                .addContainerGap())
         );
         ImageBGLayout.setVerticalGroup(
             ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-            .addGroup(ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(ImageBGLayout.createSequentialGroup()
-                    .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImageBGLayout.createSequentialGroup()
+                .addContainerGap(10, Short.MAX_VALUE)
+                .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
+
+        DetailsBG.add(ImageBG, new org.netbeans.lib.awtextra.AbsoluteConstraints(74, 20, -1, -1));
 
         FoodPrice.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         FoodPrice.setText("100.00");
+        DetailsBG.add(FoodPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 120, 235, -1));
 
         FoodName.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         FoodName.setText("Food Name");
+        DetailsBG.add(FoodName, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 235, -1));
 
         Quantity.setBackground(new java.awt.Color(214, 211, 199));
         Quantity.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         Quantity.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Quantity.setText("1");
         Quantity.setOpaque(true);
-
-        FoodTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        FoodTotal.setText("0.00");
+        DetailsBG.add(Quantity, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 120, 37, 35));
 
         plusButton.setText("+");
         plusButton.setPreferredSize(new java.awt.Dimension(40, 30));
@@ -168,6 +182,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
                 plusButtonActionPerformed(evt);
             }
         });
+        DetailsBG.add(plusButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 120, -1, 35));
 
         MinusButton.setText("-");
         MinusButton.setPreferredSize(new java.awt.Dimension(40, 30));
@@ -176,58 +191,25 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
                 MinusButtonActionPerformed(evt);
             }
         });
+        DetailsBG.add(MinusButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 120, -1, 35));
 
-        javax.swing.GroupLayout DetailsBGLayout = new javax.swing.GroupLayout(DetailsBG);
-        DetailsBG.setLayout(DetailsBGLayout);
-        DetailsBGLayout.setHorizontalGroup(
-            DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DetailsBGLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(ImageBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(FoodPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FoodName, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MinusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(Quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(plusButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 201, Short.MAX_VALUE)
-                .addComponent(FoodTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
-        );
-        DetailsBGLayout.setVerticalGroup(
-            DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(DetailsBGLayout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(FoodName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(FoodPrice))
-                    .addComponent(ImageBG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(DetailsBGLayout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addGroup(DetailsBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(Quantity, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(FoodTotal, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(plusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(MinusButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
+        FoodTotal.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        FoodTotal.setText("0.00");
+        DetailsBG.add(FoodTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 120, 155, -1));
+
+        RemoveButton.setText("REMOVE");
+        RemoveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        DetailsBG.add(RemoveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 120, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DetailsBG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(DetailsBG, javax.swing.GroupLayout.DEFAULT_SIZE, 1600, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(DetailsBG, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(DetailsBG, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -258,6 +240,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     private javax.swing.JPanel ImageBG;
     private com.app.assets.ColoredButton MinusButton;
     private javax.swing.JLabel Quantity;
+    private com.app.assets.TextButton RemoveButton;
     private com.app.assets.ColoredButton plusButton;
     // End of variables declaration//GEN-END:variables
 }
