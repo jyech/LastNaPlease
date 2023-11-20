@@ -11,13 +11,13 @@ public class FoodItem {
     private int userQuantity;
     private String userDescription;
 
-    public FoodItem(String id, String name, ImageIcon image, double price, String userDescription) {
+    public FoodItem(String id, String name, ImageIcon image, double price, String userDescription, int userQuantity) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.price = price;
         this.userDescription = userDescription;
-        this.userQuantity = 0;
+        this.userQuantity = userQuantity;
     }
 
 

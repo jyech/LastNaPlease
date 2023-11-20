@@ -6,6 +6,7 @@ package com.app.transaction;
 
 import com.app.details.FoodItem;
 import com.app.assets.ProductDetailsPanel;
+import com.app.main.HomePage;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,7 +24,7 @@ import java.util.Set;
  * 
  * @author Kirin
  */
-public class CartSection extends javax.swing.JPanel implements ProductDetailsPanel.QuantityChangeListener, ActionListener {
+public class CartSection extends javax.swing.JPanel implements ProductDetailsPanel.QuantityChangeListener {
     
     private List<FoodItem> cartItems;
     private double foodTotal;
@@ -45,23 +46,7 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
 
         // Update the total field in the CartSection when the quantity changes
         updateTotalField();
-    }
-
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() instanceof JButton) {
-            JButton removeButton = (JButton) e.getSource();
-            ProductDetailsPanel panelToRemove = findPanelFromRemoveButton(removeButton);
-            if (panelToRemove != null) {
-                removePanelAndItem(panelToRemove);
-            }
-        }
-        // Call transferToCheckout when you want to transfer the items
-        transferToCheckout();
-    }
-    
-    
+    }    
     
     public void setCheckoutSection(CheckoutSection checkoutSection) {
         this.checkoutSection = checkoutSection;
@@ -74,25 +59,6 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
             // Optionally, you may clear the cartItems list or perform additional actions
         }
     }
-    
-    private void removePanelAndItem(ProductDetailsPanel panelToRemove) {
-    // Remove the panel from the container
-    JPanel container = (JPanel) OrderScrollPane.getViewport().getView();
-    container.remove(panelToRemove);
-
-    // Remove the corresponding item from cartItems
-    String itemName = panelToRemove.getFoodName();
-    cartItems.removeIf(item -> item.getName().equals(itemName));
-
-    // Decrease the unique items count
-
-    // Update the UI
-    revalidate();
-    repaint();
-
-    // Update the total field after removal
-    updateTotalField();
-}
 
     private ProductDetailsPanel findPanelFromRemoveButton(JButton removeButton) {
     Component[] components = ((JPanel) OrderScrollPane.getViewport().getView()).getComponents();
@@ -108,28 +74,23 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
 
     return null;
 }
-
-    
-
-    private void updateRemoveButton(ProductDetailsPanel panel) {
-        JButton removeButton = panel.getRemoveButton();
-        removeButton.addActionListener(this);
-    }
-
-    
-    
-   private void updateTotalField() {
+       
+   public void updateTotalField() {
     double total = calculateTotalAmount(cartItems);
     foodTotal = total; // Update the foodTotal variable
     TotalLabel.setText(String.format("%.2f", total));
-    revalidate();
-    repaint();
 }
+   
+    public void updateTotalField(List<FoodItem> cartItems) {
+        double total = calculateTotalAmount(cartItems);
+        foodTotal = total; // Update the foodTotal variable
+        TotalLabel.setText(String.format("%.2f", total));
+    }
 
 
     
 
-private void updateFoodItemQuantity(String itemName, int newQuantity) {
+    private void updateFoodItemQuantity(String itemName, int newQuantity) {
         for (FoodItem item : cartItems) {
             if (item.getName().equals(itemName)) {
                 item.setUserQuantity(newQuantity);
@@ -139,55 +100,54 @@ private void updateFoodItemQuantity(String itemName, int newQuantity) {
     }
 
     public void displayCartItems(List<FoodItem> cartItems) {
-    this.cartItems = cartItems;
-    JPanel cartOrderPanelContainer = new JPanel();
-    cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
+        JPanel cartOrderPanelContainer = new JPanel();
+        cartOrderPanelContainer.setLayout(new BoxLayout(cartOrderPanelContainer, BoxLayout.Y_AXIS));
 
-    for (FoodItem item : cartItems) {
-    if (item.getUserQuantity() >= 1) {
-        // Check if the item is already displayed in the cart
-        ProductDetailsPanel existingPanel = findExistingPanel(cartOrderPanelContainer, item.getName());
+        for (FoodItem item : cartItems) {
+            System.out.println(item.getUserQuantity());
+            if (item.getUserQuantity() >= 1) {
+                // Check if the item is already displayed in the cart
+                ProductDetailsPanel existingPanel = findExistingPanel(cartOrderPanelContainer, item.getName());
 
-        if (existingPanel != null) {
-            // Item already exists, update its quantity
-            existingPanel.updateQuantity(existingPanel.getQuantity() + item.getUserQuantity());
-        } else {
-            // Create a new CartOrderPanel and add it to the container
-            ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(
-                    item.getName(),
-                    item.getPrice(),
-                    item.getUserQuantity()
-            );
+                if (existingPanel != null) {
+                    // Item already exists, update its quantity
+                    existingPanel.updateQuantity(existingPanel.getQuantity() + item.getUserQuantity());
+                } else {
+                    // Create a new CartOrderPanel and add it to the container
+                    ProductDetailsPanel cartOrderPanel = new ProductDetailsPanel(item);
 
-            cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
-            cartOrderPanel.setOrderImage(item.getImageIcon());
+                    cartOrderPanelContainer.setBackground(new java.awt.Color(241, 242, 237));
+                    cartOrderPanel.setOrderImage(item.getImageIcon());
 
-            // Set the listener here
-            cartOrderPanel.setQuantityChangeListener(this);
+                    // Set the listener here
+                    cartOrderPanel.setQuantityChangeListener(this);
 
-            cartOrderPanelContainer.add(cartOrderPanel);
-            cartOrderPanel.setRemoveButtonAction(this);
-
+                    cartOrderPanelContainer.add(cartOrderPanel);
+                }
+            }
         }
+
+
+        // Add vertical glue to push CartOrderPanel instances to the top
+        cartOrderPanelContainer.add(Box.createVerticalGlue());
+
+        // Add the container to the existing JScrollPane
+        OrderScrollPane.setViewportView(cartOrderPanelContainer);
+        OrderScrollPane.setAlignmentX(LEFT_ALIGNMENT);  // Ensure the alignment is set to the left
+        revalidate();
+        repaint();
+
+        // Update the total field after displaying the cart items
+        updateTotalField();
     }
-}
     
-
-    // Add vertical glue to push CartOrderPanel instances to the top
-    cartOrderPanelContainer.add(Box.createVerticalGlue());
-
-    // Add the container to the existing JScrollPane
-    OrderScrollPane.setViewportView(cartOrderPanelContainer);
-    OrderScrollPane.setAlignmentX(LEFT_ALIGNMENT);  // Ensure the alignment is set to the left
-    revalidate();
-    repaint();
-
-    // Update the total field after displaying the cart items
-    updateTotalField();
-}
-
-
-
+    public void updateTotal() {
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(CartSection.this);
+        double total = calculateTotalAmount(homepage.getCartItems());
+        
+        System.out.println("TOTAL: " + total);
+        TotalLabel.setText(String.valueOf(total));
+    }
     
     private double calculateTotalAmount(List<FoodItem> cartItems) {
     double totalAmount = 0;

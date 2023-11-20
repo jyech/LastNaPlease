@@ -312,7 +312,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="com.app.sections.MeatSection" name="meatSection2">
+                <Component class="com.app.sections.MeatSection" name="MeatSection">
                 </Component>
               </SubComponents>
             </Container>

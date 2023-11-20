@@ -6,6 +6,8 @@ package com.app.assets;
 
 import com.app.details.FoodItem;
 import com.app.details.FoodStorage;
+import com.app.main.HomePage;
+import com.app.sections.ProduceSection;
 import com.app.transaction.CartSection;
 import com.app.transaction.OrderPanelListener;
 import java.awt.Color;
@@ -15,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 /**
@@ -24,16 +27,18 @@ import javax.swing.Timer;
 public class OrderPanel extends javax.swing.JPanel {
 
     private String orderId;  // Declare the orderId field
+    private String foodName;
+    private double foodPrice;
+    private String foodDescription;
 
     ImageIcon originalIcon;
     ImageIcon scaledIcon;
 
     private OrderPanelListener orderPanelListener;
     private CartSection cartSection;  // Reference to the CartSection
-    private int quantity;
+    private int quantity = 1;
     private ProductDetailsPanel productDetailsPanel;
 
-    
     /**
      * Creates new form OrderPanel
      */
@@ -59,13 +64,6 @@ public class OrderPanel extends javax.swing.JPanel {
         this.orderPanelListener = listener;
     }
     
-    
-
-    /**
-     * Set the CartSection for this OrderPanel.
-     * 
-     * @param cartSection The CartSection to set.
-     */
     public void setCartSection(CartSection cartSection) {
         this.cartSection = cartSection;
     }
@@ -87,25 +85,40 @@ public class OrderPanel extends javax.swing.JPanel {
     public void setOrderImage(ImageIcon imageIcon) {
         // Set the image for the PictureBox
         OrderImage.setIcon(imageIcon);
+        this.originalIcon = imageIcon;
     }
     
     public void setFoodName(String foodName) {
         FoodName.setText(foodName);
+        this.foodName = foodName;
     }
     
     public void setFoodDescription(String foodDescription) {
         FoodDescription.setText(foodDescription);
+        
+        this.foodDescription = foodDescription;
     }
     
     public void setFoodPrice(double foodPrice) {
         // Convert the double value to a formatted string if needed
         String formattedPrice = String.format("%.2f", foodPrice);
         FoodPrice.setText(formattedPrice);
+        this.foodPrice = foodPrice;
+        
     }
     
-    public void enableCartButton() {
-        CartButton.setEnabled(true);
-        CartButton.setText("Add To Cart"); // Reset the text if needed
+    public void toggleAddToCartButton(boolean flag) {
+        CartButton.setEnabled(flag);
+        
+        if (flag) {
+            CartButton.setText("Add To Cart");
+        } else {
+            CartButton.setText("Added To Cart");
+        }
+    }
+    
+    public String getFoodName() {
+        return this.foodName;
     }
 
     
@@ -238,25 +251,29 @@ public class OrderPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
-        int currentQuantity = getQuantity();
-        if (currentQuantity < 99) {
+        if (quantity < 99) {
+            quantity++;
             // Increase quantity
-            Quantity.setText(String.valueOf(currentQuantity + 1));
+            Quantity.setText(String.valueOf(quantity));
         }
     }//GEN-LAST:event_plusButtonActionPerformed
 
     private void MinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusButtonActionPerformed
-        int currentQuantity = getQuantity();
-        if (currentQuantity > 1) {
+        if (quantity > 1) {
+            quantity--;
             // Decrease quantity
-            Quantity.setText(String.valueOf(currentQuantity - 1));
+            Quantity.setText(String.valueOf(quantity));
         }
     }//GEN-LAST:event_MinusButtonActionPerformed
 
     private void CartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartButtonActionPerformed
         CartButton.setText("Added to Cart");
-        CartButton.setEnabled(false);
-
+        toggleAddToCartButton(false);
+        
+        HomePage homePage = (HomePage)SwingUtilities.getWindowAncestor(OrderPanel.this);
+        
+        FoodItem foodItem = new FoodItem("no id", this.foodName, this.originalIcon, this.foodPrice, this.foodDescription, quantity);
+        homePage.addItemToCart(foodItem);
         /*// Schedule a task to reset the text after a delay (e.g., 2000 milliseconds = 2 seconds)
         int delay = 2000; // milliseconds
         ActionListener taskPerformer = new ActionListener() {

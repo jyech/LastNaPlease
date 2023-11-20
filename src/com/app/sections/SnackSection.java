@@ -28,13 +28,33 @@ public class SnackSection extends javax.swing.JPanel {
     public SnackSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("12", "Lays", new ImageIcon(getClass().getResource("/com/app/images/lays.png")), 120.0, "Potato Chips"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("13", "Popcorn", new ImageIcon(getClass().getResource("/com/app/images/popcorn.png")), 110.0, "Kernel Corn"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("14", "Nova", new ImageIcon(getClass().getResource("/com/app/images/nova.png")), 80.0, "Local Snack"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("15", "Lollipop", new ImageIcon(getClass().getResource("/com/app/images/lollipop.png")), 35.0, "Sweet Treat"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("16", "Honey Butter Chips", new ImageIcon(getClass().getResource("/com/app/images/honeybutterchips.png")), 97.0, "Potato Chips"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("12", "Lays", new ImageIcon(getClass().getResource("/com/app/images/lays.png")), 120.0, "Potato Chips", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("13", "Popcorn", new ImageIcon(getClass().getResource("/com/app/images/popcorn.png")), 110.0, "Kernel Corn", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("14", "Nova", new ImageIcon(getClass().getResource("/com/app/images/nova.png")), 80.0, "Local Snack", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("15", "Lollipop", new ImageIcon(getClass().getResource("/com/app/images/lollipop.png")), 35.0, "Sweet Treat", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("16", "Honey Butter Chips", new ImageIcon(getClass().getResource("/com/app/images/honeybutterchips.png")), 97.0, "Potato Chips", 1));
         
         initializeUI();
+    }
+    
+    public void ReinitializeUI() {
+        List<OrderPanel> foodNamePanels = Arrays.asList(LaysPanel, DoritosPanel, NovaPanel, PiattosPanel, PringlesPanel);
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(SnackSection.this);
+
+        for (int i = 0; i < foodNamePanels.size(); i++) {
+            OrderPanel foodNamePan = foodNamePanels.get(i);
+
+            boolean isInCart = false; // default to false on startup
+            
+            if (homepage != null) {
+                isInCart = homepage.isInCart(foodNamePan.getFoodName()); // Check if its in cart
+            }
+            
+            foodNamePan.toggleAddToCartButton(!isInCart);
+            
+            // Add the existing OrderPanel to the container
+            addOrderPanelToContainer(foodNamePan);
+        }
     }
     
     private void addOrderPanelToContainer(OrderPanel orderPanel) {
@@ -57,47 +77,9 @@ public class SnackSection extends javax.swing.JPanel {
 
             // Add the existing OrderPanel to the container
             addOrderPanelToContainer(foodNamePan);
-
-            // Create the AddToCartListener here and add it to the CartButton
-            AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
-
-            // Assuming you added the getCartButton method to your OrderPanel class
-            JButton cartButton = foodNamePan.getCartButton();
-            if (cartButton != null) {
-                cartButton.addActionListener(addToCartListener);
-            } else {
-                System.err.println("CartButton not found in OrderPanel.");
-            }
         }
     }
 
-    private class AddToCartListener implements ActionListener {
-    private FoodItem foodItem;
-    private OrderPanel orderPanel;
-
-    public AddToCartListener(FoodItem foodItem, OrderPanel orderPanel) {
-        this.foodItem = foodItem;
-        this.orderPanel = orderPanel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Get the quantity from the OrderPanel
-        int quantity = orderPanel.getQuantity();
-
-        // Update the FoodItem with the obtained quantity
-        foodItem.setUserQuantity(quantity);
-
-        // Add the FoodItem to the cart
-        HomePage homePage = (HomePage) SwingUtilities.getWindowAncestor(SnackSection.this);
-        homePage.addItemToCart(foodItem);
-
-        // Print a message to confirm that the item has been added
-        //System.out.println("Item added to cart: " + foodItem.getName());
-        //cartSection.displayCartItems();
-    }
-    
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
