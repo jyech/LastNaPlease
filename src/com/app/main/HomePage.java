@@ -27,8 +27,6 @@ import javax.swing.SwingUtilities;
  * @author Kirin
  */
 public class HomePage extends javax.swing.JFrame {
-    
-    
     private List<FoodItem> cartItems; 
     private CartSection cartSection;
     private String currentPage; 
@@ -56,7 +54,10 @@ public class HomePage extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton sourceButton = (JButton) e.getSource();
-            ((HomePage) SwingUtilities.getWindowAncestor(sourceButton)).switchToCartSection();
+            HomePage homePage = ((HomePage) SwingUtilities.getWindowAncestor(sourceButton));
+            homePage.switchToCartSection();
+            
+            cartSection.updateTotal();
         }
      };
         
@@ -65,6 +66,8 @@ public class HomePage extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 switchToPreviousSection();
+                
+                reinitializeSections();
             }
         });
         
@@ -90,6 +93,7 @@ public class HomePage extends javax.swing.JFrame {
      MeatBackButton.addActionListener(backButtonListener);
      SeafoodBackButton.addActionListener(backButtonListener);
      BackCheckoutButton.addActionListener(backButtonListener);
+     
      ProduceGoToCartButton.addActionListener(cartSwitchListener);
      BeverageGoToCartButton.addActionListener(cartSwitchListener);
      SnackGoToCartButton.addActionListener(cartSwitchListener);
@@ -97,6 +101,17 @@ public class HomePage extends javax.swing.JFrame {
      SeafoodGoToCartButton.addActionListener(cartSwitchListener);
     }
     
+    private void reinitializeSections() {
+        BeverageSection.ReinitializeUI();
+        SnackSection.ReinitializeUI();
+        ProduceSection.ReinitializeUI();
+        SeafoodSection.ReinitializeUI();
+        MeatSection.ReinitializeUI();
+    }
+    
+    public List<FoodItem> getCartItems() {
+        return cartItems;
+    }
     
     public void switchToProduceSection() {
         previousPage = currentPage;
@@ -156,8 +171,9 @@ public class HomePage extends javax.swing.JFrame {
         currentPage = "card9";
     }
     
-    
-
+    public void displayCartItems() {
+        cartSection.displayCartItems(cartItems);
+    }
 
     private void switchToPreviousSection() {
         System.out.println("Current Page: " + currentPage);
@@ -188,11 +204,20 @@ public class HomePage extends javax.swing.JFrame {
         }
     }
 
+    public boolean isInCart(String itemName) {
+        for (FoodItem item : cartItems) {
+            if (item.getName().equals(itemName)) return true;
+        }
+        
+        return false;
+    }
 
-
-    
     public void addItemToCart(FoodItem foodItem) {
         cartItems.add(foodItem);
+    }
+    
+    public void updateTotalField() {
+        cartSection.updateTotalField(cartItems);
     }
   
 
@@ -226,7 +251,7 @@ public class HomePage extends javax.swing.JFrame {
         ProduceSectionBG = new javax.swing.JPanel();
         FreshProduceLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        meatSection2 = new com.app.sections.MeatSection();
+        MeatSection = new com.app.sections.MeatSection();
         SeafoodPage = new javax.swing.JPanel();
         SeafoodGoToCartButton = new com.app.assets.ColoredButton();
         SeafoodBackButton = new com.app.assets.ColoredButton();
@@ -318,7 +343,7 @@ public class HomePage extends javax.swing.JFrame {
         FreshProduceLabel.setText("Meat");
 
         jScrollPane1.setHorizontalScrollBar(null);
-        jScrollPane1.setViewportView(meatSection2);
+        jScrollPane1.setViewportView(MeatSection);
 
         javax.swing.GroupLayout ProduceSectionBGLayout = new javax.swing.GroupLayout(ProduceSectionBG);
         ProduceSectionBG.setLayout(ProduceSectionBGLayout);
@@ -417,33 +442,6 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
     }
-    
-    
-    private class AddToCartListener implements ActionListener {
-    private FoodItem foodItem;
-    private OrderPanel orderPanel;
-
-    public AddToCartListener(FoodItem foodItem, OrderPanel orderPanel) {
-        this.foodItem = foodItem;
-        this.orderPanel = orderPanel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Get the quantity from the OrderPanel
-        int quantity = orderPanel.getQuantity();
-
-        // Update the FoodItem with the obtained quantity
-        foodItem.setUserQuantity(quantity);
-
-        // Add the FoodItem to the cart
-        HomePage.this.addItemToCart(foodItem);  
-
-        // Print a message to confirm that the item has been added
-        System.out.println("Item added to cart: " + foodItem.getName());
-    }
-}
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.assets.ColoredButton BackCheckoutButton;
@@ -464,6 +462,7 @@ public class HomePage extends javax.swing.JFrame {
     private com.app.assets.ColoredButton MeatBackButton;
     private com.app.assets.ColoredButton MeatGoToCartButton;
     private javax.swing.JPanel MeatPage;
+    private com.app.sections.MeatSection MeatSection;
     private com.app.assets.ColoredButton ProduceBackButton;
     private com.app.assets.ColoredButton ProduceGoToCartButton;
     private javax.swing.JPanel ProducePage;
@@ -478,6 +477,5 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel SnackPage;
     private com.app.sections.SnackSection SnackSection;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.app.sections.MeatSection meatSection2;
     // End of variables declaration//GEN-END:variables
 }

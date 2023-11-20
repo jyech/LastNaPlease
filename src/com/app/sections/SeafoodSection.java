@@ -28,13 +28,33 @@ public class SeafoodSection extends javax.swing.JPanel {
     public SeafoodSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("17", "Lobster", new ImageIcon(getClass().getResource("/com/app/images/lobster.png")), 110.0, "Seafood"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("18", "Octopus", new ImageIcon(getClass().getResource("/com/app/images/octopus.png")), 220.0, "Seafood"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("19", "Salmon", new ImageIcon(getClass().getResource("/com/app/images/salmon.png")), 250.0, "Seafood"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("20", "Shrimp", new ImageIcon(getClass().getResource("/com/app/images/shrimp.png")), 180.0, "Seafood"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("21", "Squid", new ImageIcon(getClass().getResource("/com/app/images/squid.png")), 120.0, "Seafood"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("17", "Lobster", new ImageIcon(getClass().getResource("/com/app/images/lobster.png")), 110.0, "Seafood", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("18", "Octopus", new ImageIcon(getClass().getResource("/com/app/images/octopus.png")), 220.0, "Seafood", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("19", "Salmon", new ImageIcon(getClass().getResource("/com/app/images/salmon.png")), 250.0, "Seafood", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("20", "Shrimp", new ImageIcon(getClass().getResource("/com/app/images/shrimp.png")), 180.0, "Seafood", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("21", "Squid", new ImageIcon(getClass().getResource("/com/app/images/squid.png")), 120.0, "Seafood", 1));
         
         initializeUI();
+    }
+    
+    public void ReinitializeUI() {
+        List<OrderPanel> foodNamePanels = Arrays.asList(TilapiaPanel, BangusPanel, LapuLapuPanel, GalunggongPanel, SalmonPanel);
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(SeafoodSection.this);
+
+        for (int i = 0; i < foodNamePanels.size(); i++) {
+            OrderPanel foodNamePan = foodNamePanels.get(i);
+
+            boolean isInCart = false; // default to false on startup
+            
+            if (homepage != null) {
+                isInCart = homepage.isInCart(foodNamePan.getFoodName()); // Check if its in cart
+            }
+            
+            foodNamePan.toggleAddToCartButton(!isInCart);
+            
+            // Add the existing OrderPanel to the container
+            addOrderPanelToContainer(foodNamePan);
+        }
     }
     
     private void addOrderPanelToContainer(OrderPanel orderPanel) {
@@ -57,47 +77,9 @@ public class SeafoodSection extends javax.swing.JPanel {
 
             // Add the existing OrderPanel to the container
             addOrderPanelToContainer(foodNamePan);
-
-            // Create the AddToCartListener here and add it to the CartButton
-            AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
-
-            // Assuming you added the getCartButton method to your OrderPanel class
-            JButton cartButton = foodNamePan.getCartButton();
-            if (cartButton != null) {
-                cartButton.addActionListener(addToCartListener);
-            } else {
-                System.err.println("CartButton not found in OrderPanel.");
-            }
         }
     }
 
-    private class AddToCartListener implements ActionListener {
-    private FoodItem foodItem;
-    private OrderPanel orderPanel;
-
-    public AddToCartListener(FoodItem foodItem, OrderPanel orderPanel) {
-        this.foodItem = foodItem;
-        this.orderPanel = orderPanel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Get the quantity from the OrderPanel
-        int quantity = orderPanel.getQuantity();
-
-        // Update the FoodItem with the obtained quantity
-        foodItem.setUserQuantity(quantity);
-
-        // Add the FoodItem to the cart
-        HomePage homePage = (HomePage) SwingUtilities.getWindowAncestor(SeafoodSection.this);
-        homePage.addItemToCart(foodItem);
-
-        // Print a message to confirm that the item has been added
-        //System.out.println("Item added to cart: " + foodItem.getName());
-        //cartSection.displayCartItems();
-    }
-    
-    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

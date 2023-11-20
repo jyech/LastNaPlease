@@ -4,10 +4,14 @@
  */
 package com.app.assets;
 
+import com.app.details.FoodItem;
+import com.app.main.HomePage;
 import java.awt.Image;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -15,31 +19,25 @@ import javax.swing.JButton;
  */
 public class ProductDetailsPanel extends javax.swing.JPanel {
 
-    private String foodName;
-    private String foodDescription;
-    private double foodPrice;
-    private int foodQuantity;
-    private double foodTotal;
-    private int currentTotal;
+    FoodItem foodItem;
+    double foodTotal;
     private QuantityChangeListener quantityChangeListener;
     
     
-    public ProductDetailsPanel(String name, double price, int quantity) {
+    public ProductDetailsPanel(FoodItem foodItem) {
+        this.foodItem = foodItem;
+        
         // Call the existing constructor
         initComponents();
         setOpaque(false);
 
         // Set the name of the panel
-        setName(name);
-
-        this.foodName = name;
-        this.foodPrice = price;
-        this.foodQuantity = quantity;
+        setName(foodItem.getName());
 
         // Set the values in your labels or components here
-        FoodName.setText(foodName);
-        FoodPrice.setText(String.valueOf(foodPrice));
-        Quantity.setText(String.valueOf(foodQuantity));
+        FoodName.setText(foodItem.getName());
+        FoodPrice.setText(String.valueOf(foodItem.getPrice()));
+        Quantity.setText(String.valueOf(foodItem.getUserQuantity()));
 
         // Debugging print statements
         // Update the total label after setting initial values
@@ -77,8 +75,8 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     }
 
    
-        public double calculateTotal() {
-        return foodPrice * getQuantity();
+    public double calculateTotal() {
+        return foodItem.getPrice() * getQuantity();
     }
           
     public interface QuantityChangeListener {
@@ -90,12 +88,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     }
     
   public void updateQuantity(int newQuantity) {
-    this.foodQuantity = newQuantity;
-    Quantity.setText(String.valueOf(foodQuantity));
-
-    if (quantityChangeListener != null) {
-        quantityChangeListener.onQuantityChanged(foodName, newQuantity);
-    }
+    Quantity.setText(String.valueOf(foodItem.getUserQuantity()));
 
     // Update the total label here after the quantity change
     updateTotalLabel();
@@ -103,7 +96,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
 
    
     public String getFoodName() {
-        return foodName;
+        return foodItem.getName();
     }
 
     /**
@@ -153,7 +146,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         ImageBGLayout.setVerticalGroup(
             ImageBGLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ImageBGLayout.createSequentialGroup()
-                .addContainerGap(10, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(FoodImage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
         );
@@ -199,6 +192,11 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
 
         RemoveButton.setText("REMOVE");
         RemoveButton.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        RemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RemoveButtonActionPerformed(evt);
+            }
+        });
         DetailsBG.add(RemoveButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(1380, 120, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -214,23 +212,40 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void plusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_plusButtonActionPerformed
-        int currentQuantity = getQuantity();
-        if (currentQuantity < 99) {
+        HomePage homePage = (HomePage)SwingUtilities.getWindowAncestor(ProductDetailsPanel.this);
+        
+        int quanti = foodItem.getUserQuantity();
+        if (quanti < 99) {
             // Increase quantity
-            updateQuantity(currentQuantity + 1);
             
+            foodItem.setUserQuantity(quanti + 1);
+            updateQuantity(foodItem.getUserQuantity());
         }
         
+        homePage.updateTotalField();
     }//GEN-LAST:event_plusButtonActionPerformed
 
     private void MinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusButtonActionPerformed
-        int currentQuantity = getQuantity();
-        if (currentQuantity > 1) {
+        int quanti = foodItem.getUserQuantity();
+        if (quanti > 1) {
             // Decrease quantity
-            updateQuantity(currentQuantity - 1);
+
+            foodItem.setUserQuantity(quanti - 1);
+            updateQuantity(foodItem.getUserQuantity());
         }
     }//GEN-LAST:event_MinusButtonActionPerformed
 
+    private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
+        HomePage homePage = (HomePage)SwingUtilities.getWindowAncestor(ProductDetailsPanel.this);
+        for (int i = 0; i < homePage.getCartItems().size(); i++) {
+            FoodItem item = homePage.getCartItems().get(i);
+            if (item.getName().equals(this.foodItem.getName())) {
+                homePage.getCartItems().remove(i);
+            }
+        }
+        
+        homePage.displayCartItems();
+    }//GEN-LAST:event_RemoveButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DetailsBG;

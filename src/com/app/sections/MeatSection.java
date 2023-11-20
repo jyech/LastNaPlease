@@ -16,7 +16,6 @@ import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.SwingUtilities;
-import org.netbeans.lib.awtextra.AbsoluteLayout;
 
 /**
  *
@@ -28,17 +27,37 @@ public class MeatSection extends javax.swing.JPanel {
     public MeatSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("22", "Chicken Wings", new ImageIcon(getClass().getResource("/com/app/images/chickenwing.png")), 104.88, "Poultry"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("23", "Chicken Legs", new ImageIcon(getClass().getResource("/com/app/images/chickenleg.png")), 104.88, "Poultry"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("24", "Whole Chicken", new ImageIcon(getClass().getResource("/com/app/images/wholechicken.png")), 580.0, "Poultry"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("25", "Pork Sausage", new ImageIcon(getClass().getResource("/com/app/images/sausage.png")), 280.0, "Ground Pork with Spices"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("26", "Pork Ham", new ImageIcon(getClass().getResource("/com/app/images/ham.png")), 320.0, "Cured Pork"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("27", "Pork Ribs", new ImageIcon(getClass().getResource("/com/app/images/ribs.png")), 440.0, "Pork Cut"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("28", "Beef Cubes", new ImageIcon(getClass().getResource("/com/app/images/beefcubes.png")), 280.0, "Beef Cut"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("29", "Beef Steak", new ImageIcon(getClass().getResource("/com/app/images/steak.png")), 489.0, "Beef Cut"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("30", "Beef Patty", new ImageIcon(getClass().getResource("/com/app/images/groundbeef.png")), 345.0, "Beef Cut"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("22", "Chicken Wings", new ImageIcon(getClass().getResource("/com/app/images/chickenwing.png")), 104.88, "Poultry", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("23", "Chicken Legs", new ImageIcon(getClass().getResource("/com/app/images/chickenleg.png")), 104.88, "Poultry", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("24", "Whole Chicken", new ImageIcon(getClass().getResource("/com/app/images/wholechicken.png")), 580.0, "Poultry", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("25", "Pork Sausage", new ImageIcon(getClass().getResource("/com/app/images/sausage.png")), 280.0, "Ground Pork with Spices", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("26", "Pork Ham", new ImageIcon(getClass().getResource("/com/app/images/ham.png")), 320.0, "Cured Pork", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("27", "Pork Ribs", new ImageIcon(getClass().getResource("/com/app/images/ribs.png")), 440.0, "Pork Cut", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("28", "Beef Cubes", new ImageIcon(getClass().getResource("/com/app/images/beefcubes.png")), 280.0, "Beef Cut", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("29", "Beef Steak", new ImageIcon(getClass().getResource("/com/app/images/steak.png")), 489.0, "Beef Cut", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("30", "Beef Patty", new ImageIcon(getClass().getResource("/com/app/images/groundbeef.png")), 345.0, "Beef Cut", 1));
         
         initializeUI();
+    }
+    
+    public void ReinitializeUI() {
+        List<OrderPanel> foodNamePanels = Arrays.asList(ChickenWingsPanel, ChickenLegsPanel, ChickenBreastPanel, PorkTengaPanel, PorkLiempoPanel, PorkRibsPanel, BeefBrisketPanel, BeefShankPanel, BeefSirloinPanel);
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(MeatSection.this);
+
+        for (int i = 0; i < foodNamePanels.size(); i++) {
+            OrderPanel foodNamePan = foodNamePanels.get(i);
+
+            boolean isInCart = false; // default to false on startup
+            
+            if (homepage != null) {
+                isInCart = homepage.isInCart(foodNamePan.getFoodName()); // Check if its in cart
+            }
+            
+            foodNamePan.toggleAddToCartButton(!isInCart);
+            
+            // Add the existing OrderPanel to the container
+            addOrderPanelToContainer(foodNamePan);
+        }
     }
     
     private void addOrderPanelToContainer(OrderPanel orderPanel) {
@@ -61,46 +80,7 @@ public class MeatSection extends javax.swing.JPanel {
 
             // Add the existing OrderPanel to the container
             addOrderPanelToContainer(foodNamePan);
-
-            // Create the AddToCartListener here and add it to the CartButton
-            AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
-
-            // Assuming you added the getCartButton method to your OrderPanel class
-            JButton cartButton = foodNamePan.getCartButton();
-            if (cartButton != null) {
-                cartButton.addActionListener(addToCartListener);
-            } else {
-                System.err.println("CartButton not found in OrderPanel.");
-            }
         }
-    }
-
-    private class AddToCartListener implements ActionListener {
-    private FoodItem foodItem;
-    private OrderPanel orderPanel;
-
-    public AddToCartListener(FoodItem foodItem, OrderPanel orderPanel) {
-        this.foodItem = foodItem;
-        this.orderPanel = orderPanel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Get the quantity from the OrderPanel
-        int quantity = orderPanel.getQuantity();
-
-        // Update the FoodItem with the obtained quantity
-        foodItem.setUserQuantity(quantity);
-
-        // Add the FoodItem to the cart
-        HomePage homePage = (HomePage) SwingUtilities.getWindowAncestor(MeatSection.this);
-        homePage.addItemToCart(foodItem);
-
-        // Print a message to confirm that the item has been added
-        //System.out.println("Item added to cart: " + foodItem.getName());
-        //cartSection.displayCartItems();
-    }
-    
     }
 
     /**

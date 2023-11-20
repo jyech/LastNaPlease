@@ -5,6 +5,7 @@
 package com.app.sections;
 
 import com.app.assets.OrderPanel;
+import com.app.assets.ProductDetailsPanel;
 import com.app.details.FoodItem;
 import com.app.details.FoodStorage;
 import com.app.main.HomePage;
@@ -28,13 +29,33 @@ public class BeverageSection extends javax.swing.JPanel {
     public BeverageSection() {
         initComponents();
         FoodStorage.getInstance().clear();
-        FoodStorage.getInstance().addFoodItem(new FoodItem("7", "Coke", new ImageIcon(getClass().getResource("/com/app/images/coke.png")), 33.0, "Carbonated Drink"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("8", "Milk", new ImageIcon(getClass().getResource("/com/app/images/milk.png")), 99.0, "Dairy Cow's Milk"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("9", "Soju", new ImageIcon(getClass().getResource("/com/app/images/sojus.png")), 102.0, "Distilled Alcoholic Drink"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("10", "Yakult", new ImageIcon(getClass().getResource("/com/app/images/yakult.png")), 53.0, "Probiotic Drink"));
-        FoodStorage.getInstance().addFoodItem(new FoodItem("11", "Sprite", new ImageIcon(getClass().getResource("/com/app/images/sprite.png")), 30.0, "Carbonated Drink"));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("7", "Coke", new ImageIcon(getClass().getResource("/com/app/images/coke.png")), 33.0, "Carbonated Drink", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("8", "Milk", new ImageIcon(getClass().getResource("/com/app/images/milk.png")), 99.0, "Dairy Cow's Milk", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("9", "Soju", new ImageIcon(getClass().getResource("/com/app/images/sojus.png")), 102.0, "Distilled Alcoholic Drink", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("10", "Yakult", new ImageIcon(getClass().getResource("/com/app/images/yakult.png")), 53.0, "Probiotic Drink", 1));
+        FoodStorage.getInstance().addFoodItem(new FoodItem("11", "Sprite", new ImageIcon(getClass().getResource("/com/app/images/sprite.png")), 30.0, "Carbonated Drink", 1));
         
         initializeUI();
+    }
+    
+    public void ReinitializeUI() {
+        List<OrderPanel> foodNamePanels = Arrays.asList(CokePanel, CowheadPanel, SojuPanel, YakultPanel, ChuckiePanel);
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(BeverageSection.this);
+
+        for (int i = 0; i < foodNamePanels.size(); i++) {
+            OrderPanel foodNamePan = foodNamePanels.get(i);
+
+            boolean isInCart = false; // default to false on startup
+            
+            if (homepage != null) {
+                isInCart = homepage.isInCart(foodNamePan.getFoodName()); // Check if its in cart
+            }
+            
+            foodNamePan.toggleAddToCartButton(!isInCart);
+            
+            // Add the existing OrderPanel to the container
+            addOrderPanelToContainer(foodNamePan);
+        }
     }
     
     private void addOrderPanelToContainer(OrderPanel orderPanel) {
@@ -44,6 +65,7 @@ public class BeverageSection extends javax.swing.JPanel {
     private void initializeUI() {
         List<OrderPanel> foodNamePanels = Arrays.asList(CokePanel, CowheadPanel, SojuPanel, YakultPanel, ChuckiePanel);
         List<FoodItem> foodItems = FoodStorage.getInstance().getFoodItems();
+        HomePage homepage = (HomePage)SwingUtilities.getWindowAncestor(BeverageSection.this);
 
         for (int i = 0; i < Math.min(foodNamePanels.size(), foodItems.size()); i++) {
             OrderPanel foodNamePan = foodNamePanels.get(i);
@@ -54,45 +76,19 @@ public class BeverageSection extends javax.swing.JPanel {
             foodNamePan.setFoodPrice(foodItem.getPrice());  // Assuming getPrice() returns a double
             foodNamePan.setOrderId(foodItem.getOrderId());
             foodNamePan.setOrderImage(foodItem.getImageIcon());  // Assuming getImageIcon() returns the ImageIcon
-
+            
+            System.out.println("is it still null");
+            System.out.println(homepage);
+            boolean isInCart = false; // default to false on startup
+            if (homepage != null)
+                isInCart = homepage.isInCart(foodItem.getName()); // Check if its in cart
+            
+            foodNamePan.toggleAddToCartButton(!isInCart);
+            
             // Add the existing OrderPanel to the container
             addOrderPanelToContainer(foodNamePan);
-
-            // Create the AddToCartListener here and add it to the CartButton
-            AddToCartListener addToCartListener = new AddToCartListener(foodItem, foodNamePan);
-
-            // Assuming you added the getCartButton method to your OrderPanel class
-            JButton cartButton = foodNamePan.getCartButton();
-            if (cartButton != null) {
-                cartButton.addActionListener(addToCartListener);
-            } else {
-                System.err.println("CartButton not found in OrderPanel.");
-            }
         }
     }
-
-    private class AddToCartListener implements ActionListener {
-    private FoodItem foodItem;
-    private OrderPanel orderPanel;
-
-    public AddToCartListener(FoodItem foodItem, OrderPanel orderPanel) {
-        this.foodItem = foodItem;
-        this.orderPanel = orderPanel;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Get the quantity from the OrderPanel
-        int quantity = orderPanel.getQuantity();
-
-        // Update the FoodItem with the obtained quantity
-        foodItem.setUserQuantity(quantity);
-
-        // Add the FoodItem to the cart
-        HomePage homePage = (HomePage) SwingUtilities.getWindowAncestor(BeverageSection.this);
-        homePage.addItemToCart(foodItem);
-    }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
