@@ -10,6 +10,11 @@ import java.util.List;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -17,14 +22,120 @@ import java.awt.Font;
  */
 public class CheckoutSection extends javax.swing.JPanel {
     
+    public enum DeliveryMethod {
+        SAME_DAY,
+        REGULAR,
+        PICK_UP
+    }
+    public enum PaymentMethod {
+        CASH,
+        GCASH,
+    }
+    
     private List<FoodItem> cartItems;
+    private DeliveryMethod currentDeliveryMethod;
+    private PaymentMethod currentPaymentMethod;
+
 
     public CheckoutSection() {
         initComponents();
         List<FoodItem> initialCartItems = new ArrayList<>();
         displayCartItems(initialCartItems);
+        // Add DocumentListener to FirstNameTextfield
+        addDocumentListener(FirstNameTextfield);
+        addDocumentListener(LastNameTextfield);
+        addDocumentListener(MobileNumberTextfield);
+        addDocumentListener(AddressTextfield);
+        addDocumentListener(PaymentTextfield);
         
+         SameDayButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentDeliveryMethod = DeliveryMethod.SAME_DAY;
+            // Toggle the enabled state of Regular and Pick Up buttons
+            RegularButton.setEnabled(!RegularButton.isEnabled());
+            PickUpButton.setEnabled(!PickUpButton.isEnabled());
+        }
+    });
+
+    RegularButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentDeliveryMethod = DeliveryMethod.REGULAR;
+            // Toggle the enabled state of Same Day and Pick Up buttons
+            SameDayButton.setEnabled(!SameDayButton.isEnabled());
+            PickUpButton.setEnabled(!PickUpButton.isEnabled());
+        }
+    });
+
+    PickUpButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentDeliveryMethod = DeliveryMethod.PICK_UP;
+            // Toggle the enabled state of Same Day and Regular buttons
+            SameDayButton.setEnabled(!SameDayButton.isEnabled());
+            RegularButton.setEnabled(!RegularButton.isEnabled());
+        }
+});
+    
+    
+    GCashButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentPaymentMethod = PaymentMethod.CASH;
+            // Toggle the enabled state of Same Day and Regular buttons
+            CashButton.setEnabled(!CashButton.isEnabled());
+        }
+    });
+    
+    CashButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            currentPaymentMethod = PaymentMethod.CASH;
+            // Toggle the enabled state of Same Day and Regular buttons
+            GCashButton.setEnabled(!GCashButton.isEnabled());
+        }
+    });
+    
     }
+    
+    private void addDocumentListener(javax.swing.JTextField textField) {
+        textField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updatePayButtonEnabled();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updatePayButtonEnabled();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updatePayButtonEnabled();
+            }
+            
+            
+            
+        });
+    }
+
+    private void updatePayButtonEnabled() {
+        // Enable PayButton if all specified text fields have text, otherwise disable it
+        boolean allFieldsHaveText =
+                !FirstNameTextfield.getText().trim().isEmpty() &&
+                !LastNameTextfield.getText().trim().isEmpty() &&
+                !MobileNumberTextfield.getText().trim().isEmpty() &&
+                !AddressTextfield.getText().trim().isEmpty() &&
+                !PaymentTextfield.getText().trim().isEmpty() &&
+                currentDeliveryMethod != null &&
+                currentPaymentMethod != null;
+
+        PayButton.setEnabled(allFieldsHaveText);
+    }
+    
+    
     
 // Modify the displayCartItems method
 public void displayCartItems(List<FoodItem> cartItems) {
@@ -224,25 +335,30 @@ public void displayCartItems(List<FoodItem> cartItems) {
             .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(OrderListScroll)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListOfItemsPanelLayout.createSequentialGroup()
+                        .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TotalLabel)
+                            .addComponent(PaymentLabel))
+                        .addGap(6, 6, Short.MAX_VALUE)
+                        .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                                .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(150, Short.MAX_VALUE))
+                            .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                                .addComponent(TotalNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                        .addComponent(ChangeLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(ChangeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
                         .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ListOfItemsLabel)
-                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
-                                    .addComponent(ChangeLabel)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(ChangeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListOfItemsPanelLayout.createSequentialGroup()
-                                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TotalLabel)
-                                        .addComponent(PaymentLabel))
-                                    .addGap(6, 6, Short.MAX_VALUE)
-                                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TotalNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 138, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                                .addComponent(ListOfItemsLabel)
+                                .addGap(0, 142, Short.MAX_VALUE))
+                            .addComponent(OrderListScroll))
+                        .addContainerGap())))
         );
         ListOfItemsPanelLayout.setVerticalGroup(
             ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -267,6 +383,7 @@ public void displayCartItems(List<FoodItem> cartItems) {
         );
 
         PayButton.setText("PAY");
+        PayButton.setEnabled(false);
         PayButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PayButtonActionPerformed(evt);
@@ -310,7 +427,7 @@ public void displayCartItems(List<FoodItem> cartItems) {
                         .addGap(18, 18, 18)
                         .addComponent(CashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(PaymentMethodLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ListOfItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PayButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -363,7 +480,50 @@ public void displayCartItems(List<FoodItem> cartItems) {
     }// </editor-fold>//GEN-END:initComponents
 
     private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
-        // TODO add your handling code here:
+     // Get the total amount and payment from the labels
+    double totalAmount = Double.parseDouble(TotalNumberLabel.getText());
+    double paymentAmount;
+
+    try {
+        // Attempt to parse the payment amount from the PaymentTextfield
+        paymentAmount = Double.parseDouble(PaymentTextfield.getText());
+    } catch (NumberFormatException ex) {
+        // Handle the case where the payment amount is not a valid number
+        JOptionPane.showMessageDialog(this, "Invalid payment amount. Please enter a valid number.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Check if the payment is sufficient
+    if (paymentAmount < totalAmount) {
+        // Display an error message if the payment is insufficient
+        JOptionPane.showMessageDialog(this, "Insufficient payment. Please enter a sufficient amount.", "Error", JOptionPane.ERROR_MESSAGE);
+    } else {
+        // Perform the necessary actions when payment is sufficient
+        // Check if the mobile number is valid (11 digits)
+        String mobileNumber = MobileNumberTextfield.getText().trim();
+        if (mobileNumber.length() == 11 && mobileNumber.matches("\\d+")) {
+            // Continue with the payment process
+            double changeAmount = paymentAmount - totalAmount;
+            ChangeNumberLabel.setText(String.format("PHP %.2f", changeAmount));
+
+            // Display a JOptionPane with the order status, change amount, and delivery method
+            String orderStatus = "Paid";
+            String deliveryMethod = SameDayButton.isEnabled() ? "Same Day Delivery" : (RegularButton.isEnabled() ? "Regular Delivery" : "Pick-Up");
+            String paymentMethod = GCashButton.isEnabled() ? "GCash" : (CashButton.isEnabled() ? "Cash" : "Unknown");
+
+            String message = "Order Status: " + orderStatus + "\n" +
+                    "Change: " + String.format("%.2f", changeAmount) + "\n" +
+                    "Delivery Method: " + deliveryMethod + "\n" +
+                    "Payment Method: " + paymentMethod;
+
+            JOptionPane.showMessageDialog(this, message, "Order Status", JOptionPane.INFORMATION_MESSAGE);
+
+            // Additional actions or method calls can be added here
+        } else {
+            // Display an error message for an invalid mobile number
+            JOptionPane.showMessageDialog(this, "Invalid phone number. Please enter a valid 11-digit number.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
     }//GEN-LAST:event_PayButtonActionPerformed
 
 

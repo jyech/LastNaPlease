@@ -46,7 +46,7 @@ public class HomePage extends javax.swing.JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton sourceButton = (JButton) e.getSource();
-            ((HomePage) SwingUtilities.getWindowAncestor(sourceButton)).switchToCategorySection();
+            ((HomePage) SwingUtilities.getWindowAncestor(sourceButton)).switchToPreviousSection();
         }
      };
         

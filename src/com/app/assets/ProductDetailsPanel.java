@@ -226,6 +226,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_plusButtonActionPerformed
 
     private void MinusButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MinusButtonActionPerformed
+        HomePage homePage = (HomePage)SwingUtilities.getWindowAncestor(ProductDetailsPanel.this);
         int quanti = foodItem.getUserQuantity();
         if (quanti > 1) {
             // Decrease quantity
@@ -233,6 +234,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
             foodItem.setUserQuantity(quanti - 1);
             updateQuantity(foodItem.getUserQuantity());
         }
+        homePage.updateTotalField();
     }//GEN-LAST:event_MinusButtonActionPerformed
 
     private void RemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RemoveButtonActionPerformed
@@ -245,6 +247,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         }
         
         homePage.displayCartItems();
+        homePage.updateTotalField();
     }//GEN-LAST:event_RemoveButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
