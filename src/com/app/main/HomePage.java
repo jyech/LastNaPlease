@@ -9,6 +9,7 @@ import com.app.details.FoodItem;
 import com.app.details.FoodStorage;
 import com.app.sections.ProduceSection;
 import com.app.transaction.CartSection;
+import com.app.transaction.CheckoutSection;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -33,12 +34,14 @@ public class HomePage extends javax.swing.JFrame {
     private String currentPage; 
     private String previousPage;
     private OrderPanel orderPanel;
+    private CheckoutSection checkoutSection;
    
     public HomePage() {
         initComponents();
         cartSection = CartMainPage;
         cartItems = new ArrayList<>();
         currentPage = "card2";
+        checkoutSection = CheckoutMainPage;
         
         //BackButtons
         ActionListener backButtonListener = new ActionListener() {
@@ -149,6 +152,7 @@ public class HomePage extends javax.swing.JFrame {
         previousPage = currentPage;
         CardLayout cardLayout = (CardLayout) getContentPane().getLayout();
         cardLayout.show(getContentPane(), "card9");
+        checkoutSection.displayCartItems(cartItems);
         currentPage = "card9";
     }
     
@@ -233,7 +237,7 @@ public class HomePage extends javax.swing.JFrame {
         CartMainPage = new com.app.transaction.CartSection();
         CheckoutPage = new javax.swing.JPanel();
         BackCheckoutButton = new com.app.assets.ColoredButton();
-        CheckoutBackButton = new com.app.transaction.CheckoutSection();
+        CheckoutMainPage = new com.app.transaction.CheckoutSection();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(1600, 900));
@@ -372,7 +376,7 @@ public class HomePage extends javax.swing.JFrame {
         BackCheckoutButton.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BackCheckoutButton.setRadius(100);
         CheckoutPage.add(BackCheckoutButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, 50));
-        CheckoutPage.add(CheckoutBackButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        CheckoutPage.add(CheckoutMainPage, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         getContentPane().add(CheckoutPage, "card9");
 
@@ -454,7 +458,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel CategoryPage;
     private com.app.sections.CategorySection CategorySection;
     private com.app.assets.ColoredButton CheckOutButton;
-    private com.app.transaction.CheckoutSection CheckoutBackButton;
+    private com.app.transaction.CheckoutSection CheckoutMainPage;
     private javax.swing.JPanel CheckoutPage;
     private javax.swing.JLabel FreshProduceLabel;
     private com.app.assets.ColoredButton MeatBackButton;

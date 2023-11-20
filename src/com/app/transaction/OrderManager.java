@@ -1,31 +1,34 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.app.transaction;
+
+import com.app.details.FoodItem;
+import java.util.List;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class OrderManager {
 
-    private static OrderManager instance;
-    private int nextOrderId;
+    private List<FoodItem> orderItems;
 
-    private OrderManager() {
-        // private constructor to enforce singleton pattern
-        // Initialize the order ID to 1
-        this.nextOrderId = 1;
+    public OrderManager(List<FoodItem> orderItems) {
+        this.orderItems = orderItems;
     }
 
-    public static OrderManager getInstance() {
-        if (instance == null) {
-            instance = new OrderManager();
+    public void displayOrderItems(JPanel orderListPanel) {
+        orderListPanel.removeAll(); // Clear existing components
+
+        for (FoodItem item : orderItems) {
+            if (item.getUserQuantity() >= 1) {
+                JLabel itemLabel = new JLabel(item.getName() + " x" + item.getUserQuantity());
+                orderListPanel.add(itemLabel);
+            }
         }
-        return instance;
+
+        // Add any additional components or formatting as needed
+
+        // Update the UI
+        orderListPanel.revalidate();
+        orderListPanel.repaint();
     }
 
-    public String getOrderId() {
-        // Return the current order ID and then increment for the next one
-        return String.valueOf(nextOrderId++);
-    }
+    // Other methods for managing the order, e.g., adding, removing items, calculating total, etc.
 }
-
-

@@ -1,6 +1,5 @@
 package com.app.details;
 
-import com.app.transaction.OrderManager;
 import javax.swing.ImageIcon;
 
 public class FoodItem {
@@ -19,7 +18,6 @@ public class FoodItem {
         this.price = price;
         this.userDescription = userDescription;
         this.userQuantity = 0;
-        this.orderId = OrderManager.getInstance().getOrderId();  // Get the order ID from OrderManager
     }
 
 

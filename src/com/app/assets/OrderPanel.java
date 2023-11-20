@@ -31,7 +31,8 @@ public class OrderPanel extends javax.swing.JPanel {
     private OrderPanelListener orderPanelListener;
     private CartSection cartSection;  // Reference to the CartSection
     private int quantity;
-    
+    private ProductDetailsPanel productDetailsPanel;
+
     
     /**
      * Creates new form OrderPanel
@@ -45,6 +46,10 @@ public class OrderPanel extends javax.swing.JPanel {
     return CartButton;
 }
 
+    public void setProductDetailsPanel(ProductDetailsPanel productDetailsPanel) {
+    this.productDetailsPanel = productDetailsPanel;
+}
+    
     /**
      * Set the listener for the OrderPanel.
      * 
@@ -53,6 +58,8 @@ public class OrderPanel extends javax.swing.JPanel {
     public void setOrderPanelListener(OrderPanelListener listener) {
         this.orderPanelListener = listener;
     }
+    
+    
 
     /**
      * Set the CartSection for this OrderPanel.
@@ -101,6 +108,7 @@ public class OrderPanel extends javax.swing.JPanel {
         CartButton.setText("Add To Cart"); // Reset the text if needed
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -247,8 +255,9 @@ public class OrderPanel extends javax.swing.JPanel {
 
     private void CartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CartButtonActionPerformed
         CartButton.setText("Added to Cart");
+        CartButton.setEnabled(false);
 
-        // Schedule a task to reset the text after a delay (e.g., 2000 milliseconds = 2 seconds)
+        /*// Schedule a task to reset the text after a delay (e.g., 2000 milliseconds = 2 seconds)
         int delay = 2000; // milliseconds
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -257,9 +266,12 @@ public class OrderPanel extends javax.swing.JPanel {
         };
         Timer timer = new Timer(delay, taskPerformer);
         timer.setRepeats(false); // Set to false to execute the task only once
-        timer.start();
+        timer.start();*/
     }//GEN-LAST:event_CartButtonActionPerformed
 
+    public ProductDetailsPanel getProductDetailsPanel() {
+    return productDetailsPanel;
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.app.assets.ColoredButton CartButton;

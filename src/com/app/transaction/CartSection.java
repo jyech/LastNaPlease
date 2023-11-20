@@ -26,6 +26,8 @@ import java.util.Set;
 public class CartSection extends javax.swing.JPanel implements ProductDetailsPanel.QuantityChangeListener, ActionListener {
     
     private List<FoodItem> cartItems;
+    private double foodTotal;
+    private CheckoutSection checkoutSection;
     
     
     public CartSection() {
@@ -35,12 +37,16 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
 
     @Override
     public void onQuantityChanged(String itemName, int newQuantity) {
-        // Update the total field in the CartSection when the quantity changes
-        updateTotalField();
-
         // Update the corresponding FoodItem in the cartItems list
         updateFoodItemQuantity(itemName, newQuantity);
+
+        // Update the UI
+        displayCartItems(cartItems);
+
+        // Update the total field in the CartSection when the quantity changes
+        updateTotalField();
     }
+
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -50,6 +56,22 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
             if (panelToRemove != null) {
                 removePanelAndItem(panelToRemove);
             }
+        }
+        // Call transferToCheckout when you want to transfer the items
+        transferToCheckout();
+    }
+    
+    
+    
+    public void setCheckoutSection(CheckoutSection checkoutSection) {
+        this.checkoutSection = checkoutSection;
+    }
+
+    // Method where you want to transfer the items to the checkout
+    private void transferToCheckout() {
+        if (checkoutSection != null) {
+            checkoutSection.transferToCheckout(cartItems);
+            // Optionally, you may clear the cartItems list or perform additional actions
         }
     }
     
@@ -72,8 +94,6 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
     updateTotalField();
 }
 
-
-
     private ProductDetailsPanel findPanelFromRemoveButton(JButton removeButton) {
     Component[] components = ((JPanel) OrderScrollPane.getViewport().getView()).getComponents();
 
@@ -89,6 +109,7 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
     return null;
 }
 
+    
 
     private void updateRemoveButton(ProductDetailsPanel panel) {
         JButton removeButton = panel.getRemoveButton();
@@ -97,16 +118,12 @@ public class CartSection extends javax.swing.JPanel implements ProductDetailsPan
 
     
     
-    private void updateTotalField() {
-    SwingUtilities.invokeLater(() -> {
-        
-        double totalAmount = calculateTotalAmount(cartItems);
-        
-        TotalLabel.setText(String.format("%.2f", totalAmount));
-                
-        revalidate();
-        repaint();
-    });
+   private void updateTotalField() {
+    double total = calculateTotalAmount(cartItems);
+    foodTotal = total; // Update the foodTotal variable
+    TotalLabel.setText(String.format("%.2f", total));
+    revalidate();
+    repaint();
 }
 
 

@@ -4,19 +4,93 @@
  */
 package com.app.transaction;
 
+import com.app.details.FoodItem;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+
 /**
  *
  * @author Kirin
  */
 public class CheckoutSection extends javax.swing.JPanel {
+    
+    private List<FoodItem> cartItems;
 
-    /**
-     * Creates new form CheckoutSection
-     */
     public CheckoutSection() {
         initComponents();
+        List<FoodItem> initialCartItems = new ArrayList<>();
+        displayCartItems(initialCartItems);
+        
+    }
+    
+// Modify the displayCartItems method
+public void displayCartItems(List<FoodItem> cartItems) {
+    this.cartItems = cartItems;
+    OrderListPanel.removeAll(); // Clear previous content
+    OrderListPanel.setLayout(new BoxLayout(OrderListPanel, BoxLayout.Y_AXIS));
+
+    for (FoodItem item : cartItems) {
+        if (item.getUserQuantity() >= 1) {
+            // Create JLabels for item information
+            JLabel nameLabel = new JLabel(item.getName());
+            nameLabel.setFont(new Font("Segoe UI", Font.BOLD, 24)); // Set the font with a larger size
+
+            // Multiply the price by the quantity to get the total price for the item
+            double totalPrice = item.getPrice() * item.getUserQuantity();
+            JLabel priceLabel = new JLabel(String.format("Price: " + "%.2f", totalPrice));
+            priceLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20)); // Set the font with a larger size
+
+            JLabel quantityLabel = new JLabel("Quantity: " + Integer.toString(item.getUserQuantity()));
+            quantityLabel.setFont(new Font("Segoe UI", Font.PLAIN, 20)); // Set the font with a larger size
+
+            // Add the JLabels to the OrderListPanel
+            OrderListPanel.add(nameLabel);
+            OrderListPanel.add(priceLabel);
+            OrderListPanel.add(quantityLabel);
+        }
     }
 
+    // Revalidate and repaint the OrderListPanel
+    OrderListPanel.revalidate();
+    OrderListPanel.repaint();
+
+    // Update the total field after displaying the cart items
+    updateTotalField();
+}
+
+
+
+    
+    public void updateTotalField() {
+        // Implement the logic to update the total field here
+        // For example, if you have a JLabel named TotalNumberLabel, you can update it like this:
+        double totalAmount = calculateTotalAmount(cartItems);
+        TotalNumberLabel.setText(String.format("%.2f", totalAmount));
+    }
+    
+    private double calculateTotalAmount(List<FoodItem> cartItems) {
+        double totalAmount = 0;
+
+        for (FoodItem item : cartItems) {
+            int userQuantity = item.getUserQuantity();
+            if (userQuantity >= 1) {
+                totalAmount += item.getPrice() * userQuantity;
+            }
+        }
+
+        return totalAmount;
+    }
+    
+    public void transferToCheckout(List<FoodItem> cartItems) {
+        displayCartItems(cartItems);
+        // You may also perform additional actions or calculations here
+    }
+
+ 
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,7 +118,8 @@ public class CheckoutSection extends javax.swing.JPanel {
         GCashButton = new com.app.assets.ColoredButton();
         CashButton = new com.app.assets.ColoredButton();
         ListOfItemsPanel = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        OrderListScroll = new javax.swing.JScrollPane();
+        OrderListPanel = new javax.swing.JPanel();
         TotalLabel = new javax.swing.JLabel();
         PaymentLabel = new javax.swing.JLabel();
         ChangeLabel = new javax.swing.JLabel();
@@ -114,16 +189,11 @@ public class CheckoutSection extends javax.swing.JPanel {
         ListOfItemsPanel.setBackground(new java.awt.Color(241, 242, 237));
         ListOfItemsPanel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 367, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
-        );
+        OrderListScroll.setHorizontalScrollBar(null);
+
+        OrderListPanel.setBackground(new java.awt.Color(241, 242, 237));
+        OrderListPanel.setLayout(new javax.swing.BoxLayout(OrderListPanel, javax.swing.BoxLayout.LINE_AXIS));
+        OrderListScroll.setViewportView(OrderListPanel);
 
         TotalLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TotalLabel.setText("Total");
@@ -135,10 +205,10 @@ public class CheckoutSection extends javax.swing.JPanel {
         ChangeLabel.setText("Change");
 
         TotalNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        TotalNumberLabel.setText("P 100.00");
+        TotalNumberLabel.setText("0.00");
 
         ChangeNumberLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        ChangeNumberLabel.setText("P 100.00");
+        ChangeNumberLabel.setText("0.00");
 
         PaymentTextfield.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         PaymentTextfield.setText("0.00");
@@ -154,31 +224,34 @@ public class CheckoutSection extends javax.swing.JPanel {
             .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ListOfItemsLabel)
-                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
-                            .addComponent(ChangeLabel)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ChangeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListOfItemsPanelLayout.createSequentialGroup()
-                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TotalLabel)
-                                .addComponent(PaymentLabel))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(TotalNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(12, Short.MAX_VALUE))
+                    .addComponent(OrderListScroll)
+                    .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                        .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ListOfItemsLabel)
+                            .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
+                                    .addComponent(ChangeLabel)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(ChangeNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ListOfItemsPanelLayout.createSequentialGroup()
+                                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TotalLabel)
+                                        .addComponent(PaymentLabel))
+                                    .addGap(6, 6, Short.MAX_VALUE)
+                                    .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(TotalNumberLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PaymentTextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 138, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         ListOfItemsPanelLayout.setVerticalGroup(
             ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(ListOfItemsPanelLayout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addComponent(ListOfItemsLabel)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(32, 32, 32)
+                .addComponent(OrderListScroll, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ListOfItemsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TotalLabel)
                     .addComponent(TotalNumberLabel))
@@ -194,6 +267,11 @@ public class CheckoutSection extends javax.swing.JPanel {
         );
 
         PayButton.setText("PAY");
+        PayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -232,7 +310,7 @@ public class CheckoutSection extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(CashButton, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(PaymentMethodLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 162, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ListOfItemsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(PayButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -284,6 +362,10 @@ public class CheckoutSection extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PayButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PayButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AddressLabel;
@@ -303,6 +385,8 @@ public class CheckoutSection extends javax.swing.JPanel {
     private javax.swing.JPanel ListOfItemsPanel;
     private javax.swing.JLabel MobileNumberLabel;
     private javax.swing.JTextField MobileNumberTextfield;
+    private javax.swing.JPanel OrderListPanel;
+    private javax.swing.JScrollPane OrderListScroll;
     private com.app.assets.ColoredButton PayButton;
     private javax.swing.JLabel PaymentLabel;
     private javax.swing.JLabel PaymentMethodLabel;
@@ -312,6 +396,5 @@ public class CheckoutSection extends javax.swing.JPanel {
     private com.app.assets.ColoredButton SameDayButton;
     private javax.swing.JLabel TotalLabel;
     private javax.swing.JLabel TotalNumberLabel;
-    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

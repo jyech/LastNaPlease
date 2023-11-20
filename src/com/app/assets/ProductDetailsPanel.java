@@ -218,6 +218,7 @@ public class ProductDetailsPanel extends javax.swing.JPanel {
         if (currentQuantity < 99) {
             // Increase quantity
             updateQuantity(currentQuantity + 1);
+            
         }
         
     }//GEN-LAST:event_plusButtonActionPerformed
